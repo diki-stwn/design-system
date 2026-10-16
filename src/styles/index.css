@@ -17,4 +17,8 @@
 @import "../components/Switch/Switch.css";
 @import "../components/Card/Card.css";
 @import "../components/Alert/Alert.css";
+@import "../components/IconButton/IconButton.css";
+@import "../components/Fab/Fab.css";
+@import "../components/Avatar/Avatar.css";
+@import "../components/Tabs/Tabs.css";
 @import "./utilities.css";
