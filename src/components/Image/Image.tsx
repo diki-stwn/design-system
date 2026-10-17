@@ -51,7 +51,8 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>(function Ima
   const img = React.useRef<HTMLImageElement | null>(null);
   React.useEffect(() => { setState("loading"); }, [src]);
   // An image already in the cache can finish before React listens.
-  React.useEffect(() => { const i = img.current; if (i && i.complete) setState(i.naturalWidth > 0 ? "loaded" : "error"); }, [src]);
+  // Firefox reports complete for a lazy image whose request hasn't started (empty currentSrc): that isn't an error yet.
+  React.useEffect(() => { const i = img.current; if (i && i.complete && (i.naturalWidth > 0 || i.currentSrc)) setState(i.naturalWidth > 0 ? "loaded" : "error"); }, [src]);
   const named = (base: string) => (alt ? base + ": " + alt : base);
   const frameStyle = typeof ratio === "number" ? { ...(frameProps && frameProps.style), ["--dk-image-ratio" as any]: String(ratio) } : frameProps && frameProps.style;
   const picture = state === "error"
