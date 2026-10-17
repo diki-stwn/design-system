@@ -21,10 +21,10 @@ import { Avatar, AvatarGroup } from "@diki/design-system";
 
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
-| `children` | `<Avatar>` elements | | The avatars, in order. |
+| `children` | `<Avatar>` elements | | The avatars, in order. Each can sit inside a Tooltip or a link, and fragments are opened up. |
 | `max` | `number` | all | The most avatars to show; the rest become "+N". |
 | `total` | `number` | the number of children | How many there are in all, when you pass only some. "+N" counts the ones not shown. |
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Every avatar's size. It wins over each avatar's own `size`. |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Every avatar's size, wrapped ones included. It wins over each avatar's own `size`. |
 | `label` | `string` | | The group's accessible name, such as "Assigned to". |
 | `moreLabel` | `(count) => string` | `"N more"` | What a screen reader hears for "+N". |
 
@@ -32,8 +32,10 @@ import { Avatar, AvatarGroup } from "@diki/design-system";
 
 ## Behavior
 
-- Each avatar overlaps the one before by 8px (xs, sm), 12px (md, lg) or 16px (xl); later ones sit on top. The overlap uses logical margins, so the row runs right to left in RTL.
+- Each avatar overlaps the one before by 8px (xs, sm), 12px (md, lg) or 16px (xl); earlier ones sit on top, so every status dot shows. The overlap uses logical margins, so the row runs right to left in RTL.
 - Each avatar has a 2px ring in `surface`. On another background, set `--avatar-group-ring` to that color.
+- Past 99, "+N" reads "99+" so it fits at every size; its name keeps the exact count ("116 more").
+- Wrap an avatar in a Tooltip to show the name on hover; it still lines up with the others.
 - To show who's in "+N", wrap the group in a Tooltip or Popover with the full list.
 
 ## Accessibility
