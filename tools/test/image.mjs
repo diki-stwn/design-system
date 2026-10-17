@@ -87,14 +87,14 @@ t('contrast: the fallback icon and the remove button\'s icon keep 3:1 in all six
 t('--image-radius overrides one image', (await box('tok')).radius === '3px');
 t('no errors on the page', errors.length === 0, errors.join('; '));
 
-// Firefox says a lazy image is complete before its request starts (currentSrc still empty); it must still load.
+// Firefox says a lazy image is complete before it has loaded; it must still load.
 const gk = await (await b.newContext()).newPage();
-await gk.addInitScript(() => { const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'complete'); Object.defineProperty(HTMLImageElement.prototype, 'complete', { get() { return this.currentSrc ? d.get.call(this) : true; } }); });
+await gk.addInitScript(() => { Object.defineProperty(HTMLImageElement.prototype, 'complete', { get() { return true; } }); });
 await gk.route('http://late.test/**', async (route) => { await new Promise((r) => setTimeout(r, 100)); await route.fulfill({ contentType: 'image/svg+xml', body: '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"/>' }); });
 await gk.goto(writePage('image-lazy.html', `<div id="root"></div><script>ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(window.Diki.Image, { src: 'http://late.test/a.svg', alt: 'Late', ratio: 'square', frameProps: { 'data-testid': 'late', style: { width: '100px' } } }));</script>`, { react: true }));
 await gk.waitForTimeout(500);
 const lz = await gk.evaluate(() => { const f = document.querySelector('.dk-image'); return f && [f.dataset.state, !!f.querySelector('img')].join(); });
-t('a lazy picture that reads as complete before its request starts (Firefox) still loads', lz === 'loaded,true', lz);
+t('a lazy picture that reads as complete before it has loaded (Firefox) still loads', lz === 'loaded,true', lz);
 
 await b.close();
 cleanup();
