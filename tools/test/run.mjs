@@ -23,6 +23,7 @@ const steps = [
   ['IconButton and Fab', 'node', [path.join(HERE, 'icon-button.mjs')]],
   ['Alert', 'node', [path.join(HERE, 'alert.mjs')]],
   ['Avatar', 'node', [path.join(HERE, 'avatar.mjs')]],
+  ['AvatarGroup', 'node', [path.join(HERE, 'avatar-group.mjs')]],
   ['Tabs', 'node', [path.join(HERE, 'tabs.mjs')]],
   ['Tooltip', 'node', [path.join(HERE, 'tooltip.mjs')]],
   ['Dialog', 'node', [path.join(HERE, 'dialog.mjs')]],

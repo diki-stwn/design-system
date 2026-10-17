@@ -6,6 +6,7 @@ window.Diki = Object.assign(window.Diki || {}, {
   version: Diki.version,
   Alert: Diki.Alert,
   Avatar: Diki.Avatar,
+  AvatarGroup: Diki.AvatarGroup,
   initials: Diki.initials,
   Badge: Diki.Badge,
   Button: Diki.Button,
