@@ -230,7 +230,7 @@ Text rules of thumb:
 
 ## Iconography
 
-Icons are **Material Symbols**, **Rounded** style, **Fill** on, weight 400, plus custom icons drawn to the same rules. Use no other icon set or style. The font ships in `fonts/` (`MaterialSymbolsRounded-Filled.woff2`, cut down to this one style) and `tokens.css` declares it, so there's nothing to load.
+Icons are **Material Symbols**, **Rounded** style, **Fill** on, weight 400, plus custom icons drawn to the same rules. Use no other icon set or style. The font ships in `fonts/` (`MaterialSymbolsRounded-Filled.woff2`, cut down to this one style and to the icons the system uses, 55 KB) and `tokens.css` declares it, so there's nothing to load. For any other Material Symbols name, load `fonts/icons-full.css` after `tokens.css` (the full font, about 1 MB).
 
 Use the `Icon` component (`<Icon name="delete" />`) or pass a name to Button (`leftIcon="add"`, `icon="settings"`). Icon names are listed on the Foundations/Icons page in Storybook.
 

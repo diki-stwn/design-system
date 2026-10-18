@@ -34,7 +34,16 @@ Find names in the Material Symbols catalog (Rounded style) at fonts.google.com/i
 
 ### Setup
 
-Nothing to load: the font ships with the system as `fonts/MaterialSymbolsRounded-Filled.woff2`, and `tokens.css` declares it. It holds only the filled, weight-400 Rounded style, with optical sizes from 20 to 48, about 1 MB.
+Nothing to load: the font ships with the system as `fonts/MaterialSymbolsRounded-Filled.woff2`, and `tokens.css` declares it with `font-display: block`, so a name never flashes as a word while the font loads. It holds only the filled, weight-400 Rounded style, with optical sizes from 20 to 48.
+
+The font is cut to the icons the system uses: every name on the Foundations/Icons page and every name the components and docs use, about 270 icons in 55 KB. Any other name shows as its letters. To use any Material Symbols name, load the full font (about 1 MB) after the tokens:
+
+```css
+@import "serupa-ds/tokens.css";
+@import "serupa-ds/fonts/icons-full.css";
+```
+
+In this repository, run `python3 tools/icons/subset.py` after using a new name anywhere in `src/`, `docs/` or `.storybook/`; the icon test fails until you do.
 
 ### Custom icons
 
@@ -107,7 +116,7 @@ Icons take the text color (`currentColor`). Set it with an alias, never a palett
 
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
-| `name` | `IconName`: a custom icon's name or any Material Symbols name | | Required. A custom icon with the same name as a Material Symbol wins. Custom names autocomplete. |
+| `name` | `IconName`: a custom icon's name or a Material Symbols name (any name with `fonts/icons-full.css`) | | Required. A custom icon with the same name as a Material Symbol wins. Custom names autocomplete. |
 | `size` | `number \| string` | 24px, or the button's icon size inside a Button | Pixels as a number, or any CSS length. Sets the font size; the icon is 1em square. |
 | `aria-label` | `string` | | Makes the icon meaningful: `role="img"` with this name. Without it (or `aria-labelledby`) the icon is `aria-hidden`. |
 

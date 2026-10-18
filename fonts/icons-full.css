@@ -1,0 +1,11 @@
+/* Every Material Symbols icon, for projects that use names the system doesn't.
+   The shipped font (MaterialSymbolsRounded-Filled.woff2, about 55 KB) holds only the icons the components and the
+   Foundations/Icons page use; any other name shows as its letters. Load this after tokens.css to swap in the full
+   font (about 1 MB), or cut your own with tools/icons/subset.py from the Serupa repository. */
+@font-face {
+  font-family: "Material Symbols Rounded";
+  src: url("MaterialSymbolsRounded-Filled-full.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
