@@ -31,6 +31,7 @@ node tools/test/run.mjs                   # everything, against the dist/ you bu
 node tools/test/run.mjs --update          # accept intended changes as the new baselines
 node tools/test/run.mjs --browser webkit  # the suite in WebKit (or firefox); baselines are kept per engine
 node tools/test/run.mjs --compat safari   # add the cross-browser comparison (safari, firefox or webkitgtk)
+node tools/test/run.mjs --list            # the steps it would run (with --group, of one group)
 npm run test:unit                         # only the component tests (Vitest), straight from src/, in a few seconds
 npm run test:watch                        # the same, re-running as you edit
 npx vitest run src/components/Checkbox    # one component's tests
@@ -48,7 +49,7 @@ colors, WCAG contrast in all six themes) are in `tools/test/vitest/helpers.ts`.
 
 Checkbox, Input and Field are the first ones moved; the other components are still tested by the scripts in
 the table below, listed in `SCRIPT_TESTED` in `contract.mjs`. Move them one at a time: write the test file,
-delete the script and its line in `run.mjs`, take the component off `SCRIPT_TESTED`. A new component needs
+delete the script, take the component off `SCRIPT_TESTED`. A new component needs
 its own `<Name>.test.tsx`; the contract check fails without one.
 
 ### Suite scripts

@@ -2,8 +2,7 @@
 // component can't pass CI with something missing. No browser needed.
 //   node tools/test/contract.mjs
 // Each component needs: <Name>.tsx, <Name>.css, <name>.tokens.json, <Name>.stories.tsx, <Name>.mdx, README.md,
-// preview.html, a test next to it (<Name>.test.tsx, Vitest), and a visual baseline in every theme. Every test file in
-// tools/test/ must be listed in run.mjs, or it never runs.
+// preview.html, a test next to it (<Name>.test.tsx, Vitest), and a visual baseline in every theme.
 import fs from 'node:fs';
 import path from 'node:path';
 import { HERE, PROJECT, tokensCss, report } from './lib.mjs';
@@ -60,11 +59,6 @@ for (const c of comps) {
 
 const moved = SCRIPT_TESTED.filter((c) => fs.existsSync(path.join(COMP, c, `${c}.test.tsx`)));
 t('components with their own test file are off the SCRIPT_TESTED list', !moved.length, `remove from SCRIPT_TESTED in contract.mjs: ${moved.join(', ')}`);
-
-const run = fs.readFileSync(path.join(HERE, 'run.mjs'), 'utf8');
-const HELPERS = ['lib.mjs', 'run.mjs', 'webdriver.mjs', 'compat.mjs'];   // compat.mjs runs with --compat
-const unlisted = tests.filter((f) => !HELPERS.includes(f) && !run.includes(`'${f}'`));
-t('every test file in tools/test/ is listed in run.mjs', !unlisted.length, `not listed: ${unlisted.join(', ')}`);
 
 console.log(`(${comps.length} components)`);
 process.exit(report('Contract', R) ? 0 : 1);
