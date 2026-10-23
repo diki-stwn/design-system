@@ -3,6 +3,7 @@ import { cn, isInvalid, omit, oneOf, SIZES } from "../../internal/cn";
 import { asIcon, Icon } from "../Icon/Icon";
 import type { InputProps } from "../Input/Input";
 import { component } from "../../internal/component";
+import { config } from "../../internal/config";
 
 export interface NumberInputProps extends Omit<InputProps, "type" | "value" | "defaultValue" | "rightIcon" | "min" | "max" | "step"> {
   /** The number (controlled), or null when the field is empty. Use with onValueChange. */
@@ -120,11 +121,11 @@ export const NumberInput = /* @__PURE__ */ component<HTMLInputElement, NumberInp
         onChange={onChange} onBlur={onBlur} onKeyDown={onKeyDown} onFocus={(e) => { focused.current = true; if (rest.onFocus) rest.onFocus(e); }} />
       {props.steppers !== false ? (
         <span className="dk-number-input__steppers">
-          <button type="button" tabIndex={-1} className="dk-number-input__step" aria-label={props.decrementLabel || "Decrease"} aria-controls={rest.id}
+          <button type="button" tabIndex={-1} className="dk-number-input__step" aria-label={props.decrementLabel || config.labels.decrease} aria-controls={rest.id}
             disabled={locked || (min !== undefined && now != null && now <= min)} onClick={press(-1)} onMouseDown={(e) => e.preventDefault()}>
             <Icon name="remove" />
           </button>
-          <button type="button" tabIndex={-1} className="dk-number-input__step" aria-label={props.incrementLabel || "Increase"} aria-controls={rest.id}
+          <button type="button" tabIndex={-1} className="dk-number-input__step" aria-label={props.incrementLabel || config.labels.increase} aria-controls={rest.id}
             disabled={locked || (max !== undefined && now != null && now >= max)} onClick={press(1)} onMouseDown={(e) => e.preventDefault()}>
             <Icon name="add" />
           </button>

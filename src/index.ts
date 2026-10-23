@@ -118,7 +118,7 @@ import { Tooltip } from "./components/Tooltip/Tooltip";
 export type { TooltipProps } from "./components/Tooltip/Tooltip";
 export type { Placement } from "./internal/position";
 import { configure } from "./internal/config";
-export type { SerupaConfig } from "./internal/config";
+export type { SerupaConfig, SerupaLabels } from "./internal/config";
 import { customIcons, getIcon, registerIcons } from "./icons";
 export type { CustomIconName } from "./icons";
 export type { IconData } from "./material/types";

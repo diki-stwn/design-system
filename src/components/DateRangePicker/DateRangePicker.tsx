@@ -5,6 +5,7 @@ import { useAnchoredLayer } from "../../internal/useAnchoredLayer";
 import { Calendar } from "../Calendar/Calendar";
 import { Icon } from "../Icon/Icon";
 import { component } from "../../internal/component";
+import { config } from "../../internal/config";
 
 /** A range of days; either end can be empty while it's being chosen. */
 export interface DateRange { start: Date | null; end: Date | null }
@@ -21,7 +22,7 @@ export interface DateRangePickerProps extends Omit<React.HTMLAttributes<HTMLSpan
   max?: Date;
   /** Days that can't be the start or end, such as holidays. They can sit inside a range. */
   isDateDisabled?: (date: Date) => boolean;
-  /** A BCP 47 locale for the typed format, names and first day of the week. Default: the browser's. */
+  /** A BCP 47 locale for the typed format, names and first day of the week. Default: configure({ locale }), else the browser's. */
   locale?: string;
   /** 0 Sunday … 6 Saturday. Default: the locale's. */
   weekStartsOn?: number;
@@ -55,7 +56,8 @@ const key = (d: Date | null) => (d ? d.getTime() : null);
    button or Alt+ArrowDown, and closes when the range is complete, on Escape or a click outside. */
 /** Two date fields for a start and end, with a two-month calendar popup to pick the range. */
 export const DateRangePicker = /* @__PURE__ */ component<HTMLSpanElement, DateRangePickerProps>("DateRangePicker", function DateRangePicker(props, ref) {
-  const { value: _v, defaultValue: _d, onValueChange, min, max, isDateDisabled, locale, weekStartsOn, size: _s, invalid: _i, disabled, readOnly, id, startLabel, endLabel, startName, endName, buttonLabel, months: _m, className, ...rest } = props;
+  const { value: _v, defaultValue: _d, onValueChange, min, max, isDateDisabled, locale: localeProp, weekStartsOn, size: _s, invalid: _i, disabled, readOnly, id, startLabel, endLabel, startName, endName, buttonLabel, months: _m, className, ...rest } = props;
+  const locale = localeProp || config.locale;
   const size = oneOf(SIZES, props.size, "md");
   const invalid = isInvalid(props.invalid, rest["aria-invalid"]);
   const describedBy = rest["aria-describedby"], required = rest["aria-required"];
@@ -124,7 +126,7 @@ export const DateRangePicker = /* @__PURE__ */ component<HTMLSpanElement, DateRa
   const field = (which: "start" | "end") => (
     <input type="text" inputMode="numeric" autoComplete="off" className="dk-input__field dk-date-range-picker__field"
       ref={which === "start" ? startField : undefined} id={which === "start" ? id : undefined}
-      aria-label={which === "start" ? startLabel || "Start date" : endLabel || "End date"} aria-describedby={describedBy} aria-required={required} aria-invalid={invalid || undefined}
+      aria-label={which === "start" ? startLabel || config.labels.startDate : endLabel || config.labels.endDate} aria-describedby={describedBy} aria-required={required} aria-invalid={invalid || undefined}
       value={text[which]} placeholder={datePattern(locale)} disabled={disabled} readOnly={readOnly}
       onChange={(e) => setText({ ...text, [which]: e.target.value })} onBlur={() => read(which)}
       onKeyDown={(e) => {
@@ -144,18 +146,18 @@ export const DateRangePicker = /* @__PURE__ */ component<HTMLSpanElement, DateRa
       {field("start")}
       <span className="dk-date-range-picker__dash" aria-hidden>–</span>
       {field("end")}
-      <button ref={button} type="button" className="dk-date-picker__button dk-date-range-picker__button" aria-label={buttonLabel || "Choose dates"} aria-haspopup="dialog" aria-expanded={open} aria-controls={open ? popId : undefined}
+      <button ref={button} type="button" className="dk-date-picker__button dk-date-range-picker__button" aria-label={buttonLabel || config.labels.chooseDates} aria-haspopup="dialog" aria-expanded={open} aria-controls={open ? popId : undefined}
         disabled={off} onClick={() => { if (open) close(false); else { read("start"); show(); } }}>
         <Icon name="date_range" />
       </button>
       {startName ? <input type="hidden" name={startName} value={value.start ? isoDate(value.start) : ""} disabled={disabled} /> : null}
       {endName ? <input type="hidden" name={endName} value={value.end ? isoDate(value.end) : ""} disabled={disabled} /> : null}
-      <div ref={panel} id={popId} role="dialog" aria-label={buttonLabel || "Choose dates"} {...{ popover: "manual" }} hidden={!open || undefined} className="dk-date-picker__popup dk-date-range-picker__popup"
+      <div ref={panel} id={popId} role="dialog" aria-label={buttonLabel || config.labels.chooseDates} {...{ popover: "manual" }} hidden={!open || undefined} className="dk-date-picker__popup dk-date-range-picker__popup"
         onKeyDown={(e) => { if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); close(true); } }}
         onMouseLeave={() => setHover(null)}>
         {open ? <>
           <div className="dk-date-range-picker__months">{cal(base, true)}{two ? cal(addMonths(base, 1), false) : null}</div>
-          <p className="dk-date-range-picker__status" aria-live="polite">{picking === "start" ? "Choose the start date" : "Choose the end date"}</p>
+          <p className="dk-date-range-picker__status" aria-live="polite">{picking === "start" ? config.labels.chooseStartDate : config.labels.chooseEndDate}</p>
         </> : null}
       </div>
     </span>

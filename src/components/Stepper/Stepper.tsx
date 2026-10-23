@@ -3,6 +3,7 @@ import { cn, omit } from "../../internal/cn";
 import { Icon } from "../Icon/Icon";
 import { VisuallyHidden } from "../VisuallyHidden/VisuallyHidden";
 import { component } from "../../internal/component";
+import { config } from "../../internal/config";
 
 export interface StepperStep {
   title: React.ReactNode;
@@ -42,9 +43,9 @@ export const Stepper = /* @__PURE__ */ component<HTMLElement, StepperProps>("Ste
   const current = Math.max(0, Math.min(steps.length, Math.floor(Number(props.current)) || 0));
   const vertical = props.orientation === "vertical";
   const size = props.size === "sm" ? "sm" : "md";
-  const L = { completed: "completed", error: "has an error", optional: "Optional", ...(props.labels || {}) };
+  const L = { completed: config.labels.completed, error: config.labels.hasError, optional: config.labels.optional, ...(props.labels || {}) };
   return (
-    <nav {...rest} ref={ref} aria-label={rest["aria-label"] || (rest["aria-labelledby"] ? undefined : "Progress")}
+    <nav {...rest} ref={ref} aria-label={rest["aria-label"] || (rest["aria-labelledby"] ? undefined : config.labels.progress)}
       className={cn("dk-stepper", vertical ? "dk-stepper--vertical" : "dk-stepper--horizontal", "dk-stepper--size-" + size, props.className)}
       data-component="stepper" data-orientation={vertical ? "vertical" : "horizontal"} data-size={size}>
       <ol className="dk-stepper__list">

@@ -5,6 +5,7 @@ import { Icon } from "../Icon/Icon";
 import { Button } from "../Button/Button";
 import { IconButton } from "../IconButton/IconButton";
 import { named } from "../../internal/component";
+import { config } from "../../internal/config";
 
 export type ToastTone = 'neutral' | 'info' | 'success' | 'warning' | 'danger';
 export type ToasterPosition = 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end';
@@ -78,9 +79,9 @@ export const Toaster = /* @__PURE__ */ named("Toaster", function Toaster(props: 
   const pos = oneOf(POSITIONS, position, "bottom-end");
   const ordered = pos.startsWith("top") ? list.slice().reverse() : list;   // newest nearest the edge
   return (
-    <section {...rest} aria-label={label || "Notifications"} className={cn("dk-toaster", "dk-toaster--" + pos, className)} data-component="toaster" data-position={pos}>
+    <section {...rest} aria-label={label || config.labels.notifications} className={cn("dk-toaster", "dk-toaster--" + pos, className)} data-component="toaster" data-position={pos}>
       <ol className="dk-toaster__list">
-        {ordered.map((t) => <ToastView key={t.id} item={t} dismissLabel={dismissLabel || "Dismiss"} />)}
+        {ordered.map((t) => <ToastView key={t.id} item={t} dismissLabel={dismissLabel || config.labels.dismiss} />)}
       </ol>
     </section>
   );

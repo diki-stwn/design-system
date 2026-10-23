@@ -3,6 +3,7 @@ import { cn, domId, oneOf, omit } from "../../internal/cn";
 import { IconButton } from "../IconButton/IconButton";
 import type { ContainerSize } from "../Container/Container";
 import { component } from "../../internal/component";
+import { config } from "../../internal/config";
 
 export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
   /** The logo or product name on the left, usually a link home. */
@@ -60,13 +61,13 @@ export const Navbar = /* @__PURE__ */ component<HTMLElement, NavbarProps>("Navba
         <div className={cn("dk-navbar__inner dk-container dk-container--padded", "dk-container--" + size)}>
           {props.brand != null ? <div className="dk-navbar__brand">{props.brand}</div> : null}
           {hasLinks ? (
-            <nav id={id} aria-label={props["aria-label"] || "Main"} className="dk-navbar__nav">
+            <nav id={id} aria-label={props["aria-label"] || config.labels.mainNavigation} className="dk-navbar__nav">
               <ul className="dk-navbar__links">{React.Children.map(props.children, (c) => c == null || c === false ? null : <li>{c}</li>)}</ul>
             </nav>
           ) : null}
           {props.actions != null ? <div className="dk-navbar__actions">{props.actions}</div> : null}
           {hasLinks ? (
-            <IconButton ref={toggle} className="dk-navbar__toggle" icon={open ? "close" : "menu"} label={props.menuLabel || "Menu"} noTitle
+            <IconButton ref={toggle} className="dk-navbar__toggle" icon={open ? "close" : "menu"} label={props.menuLabel || config.labels.menu} noTitle
               aria-expanded={open} aria-controls={id} onClick={() => setOpen(!open)} />
           ) : null}
         </div>

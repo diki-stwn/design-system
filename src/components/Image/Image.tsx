@@ -4,6 +4,7 @@ import { Dialog } from "../Dialog/Dialog";
 import { Icon } from "../Icon/Icon";
 import { IconButton } from "../IconButton/IconButton";
 import { component } from "../../internal/component";
+import { config } from "../../internal/config";
 
 export type ImageRatio = 'auto' | 'square' | '4:3' | 'video' | number;
 
@@ -64,11 +65,11 @@ export const Image = /* @__PURE__ */ component<HTMLImageElement, ImageProps>("Im
       className={cn("dk-image", "dk-image--ratio-" + (typeof ratio === "number" ? "custom" : ratio.replace(":", "-")), "dk-image--" + fit, rounded !== false && "dk-image--rounded", "dk-image--" + state, frameProps && frameProps.className)}
       data-component="image" data-state={state}>
       {viewable && state !== "error"
-        ? <button type="button" className="dk-image__view" aria-label={viewLabel || named("View image")} aria-haspopup="dialog" onClick={() => setOpen(true)}>{picture}</button>
+        ? <button type="button" className="dk-image__view" aria-label={viewLabel || named(config.labels.viewImage)} aria-haspopup="dialog" onClick={() => setOpen(true)}>{picture}</button>
         : picture}
-      {onRemove ? <IconButton className="dk-image__remove" icon="close" label={removeLabel || named("Remove image")} size="sm" variant="secondary" shape="round" noTitle onClick={onRemove} /> : null}
+      {onRemove ? <IconButton className="dk-image__remove" icon="close" label={removeLabel || named(config.labels.removeImage)} size="sm" variant="secondary" shape="round" noTitle onClick={onRemove} /> : null}
       {viewable ? (
-        <Dialog open={open} onOpenChange={setOpen} size="lg" title={alt || undefined} aria-label={alt ? undefined : viewLabel || "Image"} className="dk-image__viewer">
+        <Dialog open={open} onOpenChange={setOpen} size="lg" title={alt || undefined} aria-label={alt ? undefined : viewLabel || config.labels.image} className="dk-image__viewer">
           {open ? <img src={fullSrc || src} alt={alt} className="dk-image__full" /> : null}
         </Dialog>
       ) : null}

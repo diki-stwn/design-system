@@ -3,6 +3,7 @@ import { cn, oneOf, omit } from "../../internal/cn";
 import { Icon, asIcon, type IconSource } from "../Icon/Icon";
 import { Button } from "../Button/Button";
 import { component } from "../../internal/component";
+import { config } from "../../internal/config";
 
 export type AlertTone = 'info' | 'success' | 'warning' | 'danger' | 'neutral';
 
@@ -43,7 +44,7 @@ export const Alert = /* @__PURE__ */ component<HTMLDivElement, AlertProps>("Aler
         {has(props.children) ? <div className="dk-alert__message">{props.children}</div> : null}
         {has(props.actions) ? <div className="dk-alert__actions">{props.actions}</div> : null}
       </div>
-      {props.onDismiss ? <Button className="dk-alert__dismiss" variant="ghost" size="sm" icon="close" aria-label={props.dismissLabel || "Dismiss"} onClick={props.onDismiss} /> : null}
+      {props.onDismiss ? <Button className="dk-alert__dismiss" variant="ghost" size="sm" icon="close" aria-label={props.dismissLabel || config.labels.dismiss} onClick={props.onDismiss} /> : null}
     </div>
   );
 });

@@ -4,6 +4,7 @@ import { asIcon, Icon, type IconSource } from "../Icon/Icon";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Menu, MenuItem } from "../Menu/Menu";
 import { component } from "../../internal/component";
+import { config } from "../../internal/config";
 
 export interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   /** SidebarSections, or SidebarItems directly. */
@@ -63,7 +64,7 @@ export const Sidebar = /* @__PURE__ */ component<HTMLElement, SidebarProps>("Sid
   flush();
   return (
     <SidebarContext.Provider value={{ collapsed, depth: 0 }}>
-      <nav {...rest} aria-label={props["aria-label"] || "Main"} ref={ref} data-component="sidebar" data-collapsed={collapsed ? "" : undefined}
+      <nav {...rest} aria-label={props["aria-label"] || config.labels.mainNavigation} ref={ref} data-component="sidebar" data-collapsed={collapsed ? "" : undefined}
         className={cn("dk-sidebar", collapsed && "dk-sidebar--collapsed", props.className)}>
         {props.header != null ? <div className="dk-sidebar__header">{props.header}</div> : null}
         <div className="dk-sidebar__body">{body}</div>

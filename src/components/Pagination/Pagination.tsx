@@ -2,6 +2,7 @@ import * as React from "react";
 import { cn, oneOf, omit } from "../../internal/cn";
 import { Icon } from "../Icon/Icon";
 import { component } from "../../internal/component";
+import { config } from "../../internal/config";
 
 export interface PaginationProps extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
   /** How many pages there are. */
@@ -62,7 +63,7 @@ export const Pagination = /* @__PURE__ */ component<HTMLElement, PaginationProps
   const controlled = props.page !== undefined;
   const page = Math.min(Math.max(int(controlled ? props.page : own, 1, 1), 1), Math.max(count, 1));
   const size = oneOf(["sm", "md"] as const, props.size, "md");
-  const label = props.pageLabel || ((n: number) => "Page " + n);
+  const label = props.pageLabel || config.labels.page;
   const go = (n: number, e: React.MouseEvent) => {
     if (n < 1 || n > count || n === page) { if (!props.getHref || n === page) e.preventDefault(); return; }
     if (!controlled) setOwn(n);
@@ -78,10 +79,10 @@ export const Pagination = /* @__PURE__ */ component<HTMLElement, PaginationProps
     const icons = dir === "prev"
       ? <><Icon name="chevron_left" className="dk-pagination__ltr" /><Icon name="chevron_right" className="dk-pagination__rtl" /></>
       : <><Icon name="chevron_right" className="dk-pagination__ltr" /><Icon name="chevron_left" className="dk-pagination__rtl" /></>;
-    return <li key={dir}>{item(n, icons, { "aria-label": dir === "prev" ? props.previousLabel || "Previous page" : props.nextLabel || "Next page", rel: props.getHref ? dir : undefined }, n < 1 || n > count, "dk-pagination__arrow")}</li>;
+    return <li key={dir}>{item(n, icons, { "aria-label": dir === "prev" ? props.previousLabel || config.labels.previousPage : props.nextLabel || config.labels.nextPage, rel: props.getHref ? dir : undefined }, n < 1 || n > count, "dk-pagination__arrow")}</li>;
   };
   return (
-    <nav aria-label="Pagination" {...rest} ref={ref} data-component="pagination" className={cn("dk-pagination", size === "sm" && "dk-pagination--sm", props.className)}>
+    <nav aria-label={config.labels.pagination} {...rest} ref={ref} data-component="pagination" className={cn("dk-pagination", size === "sm" && "dk-pagination--sm", props.className)}>
       <ul className="dk-pagination__list">
         {arrow("prev")}
         {paginationRange(page, count, int(props.siblings, 0, 1), int(props.boundaries, 0, 1)).map((e) => typeof e === "number"

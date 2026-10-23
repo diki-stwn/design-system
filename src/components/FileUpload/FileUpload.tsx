@@ -4,6 +4,7 @@ import { Button } from "../Button/Button";
 import { IconButton } from "../IconButton/IconButton";
 import { Icon } from "../Icon/Icon";
 import { component } from "../../internal/component";
+import { config } from "../../internal/config";
 
 export type FileRejection = { file: File; reason: 'type' | 'size' | 'count'; message: string };
 export interface FileUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue' | 'title'> {
@@ -72,7 +73,7 @@ export const FileUpload = /* @__PURE__ */ component<HTMLDivElement, FileUploadPr
   const [over, setOver] = React.useState(false);
   const depth = React.useRef(0);
   const multiple = !!props.multiple, disabled = !!props.disabled;
-  const removeLabel = props.removeLabel || ((n: string) => "Remove " + n);
+  const removeLabel = props.removeLabel || ((n: string) => config.labels.remove + " " + n);
 
   const set = (next: File[]) => { if (!controlled) setOwn(next); if (props.onFilesChange) props.onFilesChange(next); };
   const add = (list: FileList | File[] | null) => {
@@ -120,9 +121,9 @@ export const FileUpload = /* @__PURE__ */ component<HTMLDivElement, FileUploadPr
       <div className={cn("dk-file-upload__zone", over && "dk-file-upload__zone--over")} data-dragging={over ? "" : undefined} aria-disabled={disabled || undefined} {...drag}
         onClick={(e) => { if (!disabled && e.target === e.currentTarget && input.current) input.current.click(); }}>
         <Icon name="upload_file" className="dk-file-upload__icon" />
-        <p className="dk-file-upload__title">{props.title ?? (multiple ? "Drag files here" : "Drag a file here")}</p>
+        <p className="dk-file-upload__title">{props.title ?? (multiple ? config.labels.dragFiles : config.labels.dragFile)}</p>
         <Button ref={chooser} variant="outline" size="sm" disabled={disabled} onClick={() => input.current && input.current.click()} aria-describedby={hasHint ? base + "-hint" : undefined}>
-          {props.buttonLabel || (multiple ? "Choose files" : "Choose a file")}
+          {props.buttonLabel || (multiple ? config.labels.chooseFiles : config.labels.chooseFile)}
         </Button>
         {hasHint ? <p className="dk-file-upload__hint" id={base + "-hint"}>{props.hint}</p> : null}
         <input ref={input} id={inputId} type="file" className="dk-file-upload__input" tabIndex={-1} aria-hidden name={props.name} accept={props.accept} multiple={multiple} disabled={disabled}
@@ -134,7 +135,7 @@ export const FileUpload = /* @__PURE__ */ component<HTMLDivElement, FileUploadPr
         </div>
       ) : null}
       {files.length ? (
-        <ul className="dk-file-upload__list" aria-label={multiple ? "Chosen files" : "Chosen file"}>
+        <ul className="dk-file-upload__list" aria-label={multiple ? config.labels.chosenFiles : config.labels.chosenFile}>
           {files.map((f, i) => (
             <li key={f.name + f.size + f.lastModified + i} className="dk-file-upload__item">
               <Icon name={iconFor(f)} className="dk-file-upload__file-icon" />

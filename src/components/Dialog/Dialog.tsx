@@ -2,6 +2,7 @@ import * as React from "react";
 import { cn, domId, oneOf, omit, setRef, useIsoLayoutEffect } from "../../internal/cn";
 import { IconButton } from "../IconButton/IconButton";
 import { component } from "../../internal/component";
+import { config } from "../../internal/config";
 
 export interface DialogProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, 'title' | 'open'> {
   /** Whether it's open. Controlled: close it yourself in onOpenChange. */
@@ -93,7 +94,7 @@ export const Dialog = /* @__PURE__ */ component<HTMLDialogElement, DialogProps>(
               {has(props.title) ? <h2 className="dk-dialog__title" id={base + "-title"}>{props.title}</h2> : null}
               {has(props.description) ? <p className="dk-dialog__description" id={base + "-desc"}>{props.description}</p> : null}
             </div>
-            {showClose ? <IconButton className="dk-dialog__close" icon="close" label={props.closeLabel || "Close"} size="sm" noTitle onClick={close} /> : null}
+            {showClose ? <IconButton className="dk-dialog__close" icon="close" label={props.closeLabel || config.labels.close} size="sm" noTitle onClick={close} /> : null}
           </div>
         ) : null}
         {has(props.children) ? <div className="dk-dialog__body">{props.children}</div> : null}

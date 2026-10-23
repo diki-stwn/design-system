@@ -5,6 +5,7 @@ import { asIcon, Icon } from "../Icon/Icon";
 import { Loader } from "../Loader/Loader";
 import type { InputProps } from "../Input/Input";
 import { component } from "../../internal/component";
+import { config } from "../../internal/config";
 
 export type ComboboxOption = string | { value: string; label: string; description?: React.ReactNode; disabled?: boolean };
 export interface ComboboxProps extends Omit<InputProps, "type" | "value" | "defaultValue" | "rightIcon" | "onChange"> {
@@ -168,7 +169,7 @@ export const Combobox = /* @__PURE__ */ component<HTMLInputElement, ComboboxProp
         <Icon name="expand_more" />
       </button>
       <div ref={pop} className="dk-combobox__popup" {...{ popover: "manual" }} hidden={!open || undefined} onMouseDown={keep}>
-        {props.loading ? <div className="dk-combobox__message" role="status"><Loader size="sm" delay={0} label="" />{props.loadingText || "Loading…"}</div> : null}
+        {props.loading ? <div className="dk-combobox__message" role="status"><Loader size="sm" delay={0} label="" />{props.loadingText || config.labels.loadingResults}</div> : null}
         <div id={listId} role="listbox" className="dk-combobox__listbox" aria-labelledby={rest["aria-labelledby"]} aria-label={rest["aria-labelledby"] ? undefined : rest["aria-label"]}>
           {shown.map((o) => (
             <div key={o.value} id={base + "-opt-" + o.i} role="option" aria-selected={o.value === value} aria-disabled={o.disabled || undefined}
@@ -182,7 +183,7 @@ export const Combobox = /* @__PURE__ */ component<HTMLInputElement, ComboboxProp
             </div>
           ))}
         </div>
-        {!props.loading && shown.length === 0 ? <div className="dk-combobox__message" role="status">{props.emptyText ?? "No results"}</div> : null}
+        {!props.loading && shown.length === 0 ? <div className="dk-combobox__message" role="status">{props.emptyText ?? config.labels.noResults}</div> : null}
       </div>
       {props.name ? <input type="hidden" name={props.name} value={value ?? ""} disabled={rest.disabled} /> : null}
     </span>
