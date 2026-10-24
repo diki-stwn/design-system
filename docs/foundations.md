@@ -61,7 +61,7 @@ Each color that changes between themes is a `light-dark()` pair, and `data-mode`
 
 **More contrast** — `data-contrast="more"` gives 7:1 text (muted text and placeholders included) and stronger borders and field outlines, in every theme. It also applies on its own when the visitor's system asks for more contrast (`prefers-contrast: more`); a page can opt out with `data-contrast="normal"` on `<html>`.
 
-**Density** — `data-density="compact"` makes `md` controls 28px and `lg` 36px (from 32 and 44) for dashboards and data-heavy screens; `sm` stays 24px, the WCAG 2.2 minimum target. Components read the `--control-height-*` tokens, so they need nothing else. `data-density="comfortable"` puts the defaults back for one section.
+**Density** — `data-density="compact"` makes `md` controls 28px, `lg` 36px and `xl` 44px (from 32, 40 and 48) for dashboards and data-heavy screens; `xs` and `sm` stay 20px and 24px, so `sm` keeps the WCAG 2.2 minimum target. Components read the `--control-height-*` tokens, so they need nothing else. `data-density="comfortable"` puts the defaults back for one section.
 
 **Automatic dark mode** — `theme.js` (standalone, no React, `dist/theme.js` in the package) sets `data-theme` for the page from a brand and a mode, follows the visitor's light/dark setting live when the mode is `auto`, and remembers a choice the visitor makes. Load it first in `<head>` so the page never flashes the wrong theme:
 
@@ -625,9 +625,13 @@ Rules of thumb:
 
 | Token | Value | Use |
 | --- | --- | --- |
+| `control-height-xs` | 1.25rem (20px) | Chips, tags and inline toggles in dense rows; below the 24px target, so space them out |
 | `control-height-sm` | 1.5rem (24px) | Small controls; the WCAG 2.2 AA minimum target |
-| `control-height-md` | 2rem (32px) | Default buttons, inputs and selects |
-| `control-height-lg` | 2.75rem (44px) | Large controls; the comfortable touch target (WCAG 2.5.5) |
+| `control-height-md` | 2rem (32px) | Default buttons, inputs and selects, menu items, sidebar items |
+| `control-height-lg` | 2.5rem (40px) | Large controls, line tabs, menu items with a description |
+| `control-height-xl` | 3rem (48px) | Touch-first screens and hero calls to action; above the 44px comfortable target (WCAG 2.5.5) |
+
+Five steps, 8px apart from `sm` up, so nothing needs an off-scale 36 or 44.
 
 ## Motion
 

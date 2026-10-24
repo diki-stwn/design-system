@@ -747,9 +747,11 @@
   --sizing-fit: fit-content; /* Content size, capped by the space available. */
   --sizing-none: none; /* No limit (max-* only). */
   --sizing-lh: 1lh; /* One line of text (height-axis). */
+  --control-height-xs: 1.25rem; /* Height of extra-small controls (20px): chips, tags and inline toggles inside dense rows. Below the 24px target, so give it 24px of spacing or use it where a larger target sits nearby. */
   --control-height-sm: 1.5rem; /* Height of small controls (24px): `sm` buttons, compact inputs. The WCAG 2.2 AA minimum target size. */
   --control-height-md: 2rem; /* Height of default controls (32px): buttons, inputs and selects line up at this height. */
-  --control-height-lg: 2.75rem; /* Height of large controls (44px), the comfortable touch target (WCAG 2.5.5). */
+  --control-height-lg: 2.5rem; /* Height of large controls (40px): `lg` buttons and inputs, line tabs, menu items with a description. */
+  --control-height-xl: 3rem; /* Height of extra-large controls (48px): touch-first screens and hero calls to action. Above the 44px comfortable touch target (WCAG 2.5.5). */
   --flex-auto: auto; /* `flex-auto`: grow and shrink from the content size. */
   --flex-initial: 0 auto; /* `flex-initial`: shrink but don't grow. */
   --flex-none: none; /* `flex-none`: keep the content size. */
@@ -969,14 +971,18 @@
 }
 }
 [data-density="compact"] {
+  --control-height-xs: 1.25rem;
   --control-height-sm: 1.5rem;
   --control-height-md: 1.75rem;
   --control-height-lg: 2.25rem;
+  --control-height-xl: 2.75rem;
 }
 [data-density="comfortable"] {
+  --control-height-xs: 1.25rem;
   --control-height-sm: 1.5rem;
   --control-height-md: 2rem;
-  --control-height-lg: 2.75rem;
+  --control-height-lg: 2.5rem;
+  --control-height-xl: 3rem;
 }
 .type-xs {
   font-family: var(--font-sans);

@@ -261,7 +261,7 @@ describe('Button', () => {
     const probe = (theme: string | null, prop: 'backgroundColor' | 'borderTopColor', v: string) => { const d = document.createElement('div'); if (theme) d.setAttribute('data-theme', theme); d.style[prop] = v; document.body.appendChild(d); const r = getComputedStyle(d)[prop]; d.remove(); return r; };
     await eased(document.body);
     expect(parseFloat(g('pb').borderTopLeftRadius)).toBeGreaterThan(1000);
-    expect(g('pb').height).toBe('44px');
+    expect(g('pb').height).toBe('40px');
     expect(g('one').backgroundColor).toBe(probe(null, 'backgroundColor', 'var(--emerald-600)'));
     expect(g('plainb').backgroundColor).toBe(color('var(--primary)'));
     expect(g('nested').backgroundColor).toBe(probe('violet-dark', 'backgroundColor', 'var(--primary)'));

@@ -1,6 +1,6 @@
 # Select
 
-A native `<select>` styled like Input: the same three heights (24, 32 and 44px), colors, focus ring and states, with a chevron and an optional left icon. It keeps everything the browser gives a select for free: the system picker on phones, type-to-find, and full keyboard and screen-reader support.
+A native `<select>` styled like Input: the same three heights (24, 32 and 40px), colors, focus ring and states, with a chevron and an optional left icon. It keeps everything the browser gives a select for free: the system picker on phones, type-to-find, and full keyboard and screen-reader support.
 
 ```jsx
 const { Select, Field } = window.Serupa;
@@ -61,7 +61,7 @@ const { Select, Field } = window.Serupa;
 
 | Prop | Type | Default | What it does |
 | --- | --- | --- | --- |
-| `size` | `'sm'` \| `'md'` \| `'lg'` | `'md'` | 24px with `text-xs`, 32px with `text-sm`, 44px with `text-base`, like Input |
+| `size` | `'sm'` \| `'md'` \| `'lg'` | `'md'` | 24px with `text-xs`, 32px with `text-sm`, 40px with `text-base`, like Input |
 | `options` | array | | Strings (value and label), `{ value, label, disabled }`, or groups `{ label, options, disabled }`. `<option>` and `<optgroup>` children come after them |
 | `placeholder` | string | | A first, empty option shown in the placeholder color until something is picked. It can't be picked back. An uncontrolled Select starts on it |
 | `leftIcon` | icon name or element | | A decorative icon before the text (14, 16 or 20px, in `text-muted`) |
@@ -84,7 +84,7 @@ Each is an optional override: set it on the page, a container or one select. The
 | `--select-icon-color` | `text-muted` | Chevron and left icon |
 | `--select-focus-ring` | `focus-ring` | Border and ring while focused |
 | `--select-invalid` | `danger` | Border and ring when invalid |
-| `--select-height-sm` / `-md` / `-lg` | `control-height-sm` / `-md` / `-lg` | Heights (24, 32, 44px) |
+| `--select-height-sm` / `-md` / `-lg` | `control-height-sm` / `-md` / `-lg` | Heights (24, 32, 40px) |
 | `--select-icon-size-sm` / `-md` / `-lg` | `spacing-3.5` / `spacing-4` / `spacing-5` | Icon sizes (14, 16, 20px) |
 | `--select-padding-x-sm` / `-md` / `-lg` | `spacing-2` / `spacing-3` / `spacing-4` | Side padding (8, 12, 16px) |
 | `--select-gap` | `spacing-2` | Gap between an icon and the text (8px) |

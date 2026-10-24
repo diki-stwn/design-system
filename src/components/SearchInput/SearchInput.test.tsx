@@ -71,14 +71,14 @@ describe('SearchInput', () => {
     expect(outer).toBe(0);
   });
 
-  test('disabled: no clear button, even with text; lg: 44px, a 20px icon, clearLabel names the ×', async () => {
+  test('disabled: no clear button, even with text; lg: 40px, a 20px icon, clearLabel names the ×', async () => {
     await render(<Wrap>
       <SearchInput id="sdis" aria-label="Dis" disabled defaultValue="x" />
       <SearchInput id="slg" aria-label="Lg" size="lg" defaultValue="big" clearLabel="Clear" />
     </Wrap>);
     expect(clearBtn('sdis')).toBeNull();
     expect([Math.round(box('slg').getBoundingClientRect().height), clearBtn('slg')!.getAttribute('aria-label'), css(box('slg').querySelector('.dk-search-input__icon .dk-icon')).fontSize])
-      .toEqual([44, 'Clear', '20px']);
+      .toEqual([40, 'Clear', '20px']);
   });
 
   test('loading: a 16px loader named "Searching" in place of the icon', async () => {

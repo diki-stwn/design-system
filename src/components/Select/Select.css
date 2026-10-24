@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------
-   Select: a native <select> styled like Input, at the control heights (24, 32, 44px). The <select> fills the box,
+   Select: a native <select> styled like Input, at the control heights (24, 32, 40px). The <select> fills the box,
    so a click anywhere opens it; the icons sit over it and don't take clicks. Structure: .dk-select (the box) >
    .dk-select__icon--left, .dk-select__field (the native <select>), .dk-select__icon--chevron. Every value goes
    through --select-* tokens.

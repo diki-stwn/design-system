@@ -93,7 +93,7 @@
 .dk-btn--ghost.dk-btn--destructive:hover:not(:disabled, [aria-disabled="true"]) { background: var(--button-destructive-ghost-bg-hover, var(--danger-subtle)); }
 .dk-btn--link.dk-btn--destructive { color: var(--button-destructive-link-text, var(--danger-text)); }
 
-/* Sizes: sm 24px, md 32px, lg 44px */
+/* Sizes: sm 24px, md 32px, lg 40px */
 .dk-btn--size-sm { height: var(--button-height-sm, var(--control-height-sm)); padding: var(--spacing-0) var(--button-padding-x-sm, var(--spacing-2)); gap: var(--button-gap-sm, var(--spacing-1)); font-size: var(--text-xs); line-height: var(--text-xs--line-height); }
 .dk-btn--size-sm svg { width: var(--button-icon-size-sm, var(--spacing-3\.5)); height: var(--button-icon-size-sm, var(--spacing-3\.5)); }
 .dk-btn--size-sm .dk-icon { font-size: var(--button-icon-size-sm, var(--spacing-3\.5)); }

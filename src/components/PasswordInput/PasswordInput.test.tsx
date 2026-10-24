@@ -52,10 +52,10 @@ describe('PasswordInput', () => {
     expect([css(toggle('pw')).outlineStyle, css(toggle('pw')).outlineWidth]).toEqual(['solid', '2px']);
   });
 
-  test('defaultVisible starts shown; autoComplete and toggleLabel are yours; size lg is 44px', async () => {
+  test('defaultVisible starts shown; autoComplete and toggleLabel are yours; size lg is 40px', async () => {
     await render(<Wrap><PasswordInput id="pnew" aria-label="New" autoComplete="new-password" defaultVisible size="lg" toggleLabel="Show the new password" /></Wrap>);
     expect([field('pnew').type, field('pnew').getAttribute('autocomplete'), toggle('pnew').getAttribute('aria-label'), Math.round(box('pnew').getBoundingClientRect().height)])
-      .toEqual(['text', 'new-password', 'Show the new password', 44]);
+      .toEqual(['text', 'new-password', 'Show the new password', 40]);
   });
 
   test('controlled: onVisibleChange gets the new state, the parent sets it', async () => {

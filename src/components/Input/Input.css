@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------
-   Input: a single-line text field. Sizes sm, md, lg at the control heights (24, 32, 44px, like Button), with
+   Input: a single-line text field. Sizes sm, md, lg at the control heights (24, 32, 40px, like Button), with
    text-xs, text-sm and text-base. Field colors come from the alias tokens (field, field-border, placeholder),
    so it keeps 4.5:1 text and a 3:1 border in every theme. Structure: .dk-input (the box) > .dk-input__icon--left,
    .dk-input__field (the native <input>), .dk-input__icon--right. Every value goes through --input-* tokens.

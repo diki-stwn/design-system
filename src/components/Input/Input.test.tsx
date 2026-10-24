@@ -18,7 +18,7 @@ describe('Input', () => {
     expect([s.height, s.fontSize, s.paddingLeft, s.borderTopWidth, s.borderTopLeftRadius]).toEqual(['32px', '14px', '12px', '1px', '6px']);
   });
 
-  test('sizes: sm 24px, text-xs, 8px padding; lg 44px, text-base, 16px padding; an unknown size falls back to md', async () => {
+  test('sizes: sm 24px, text-xs, 8px padding; lg 40px, text-base, 16px padding; an unknown size falls back to md', async () => {
     await render(<>
       <Input id="sm" size="sm" aria-label="Small" />
       <Input id="lg" size="lg" aria-label="Large" />
@@ -27,7 +27,7 @@ describe('Input', () => {
     </>);
     const m = (id: string) => { const s = css(box(id)); return [s.height, s.fontSize, s.paddingLeft]; };
     expect(m('sm')).toEqual(['24px', '12px', '8px']);
-    expect(m('lg')).toEqual(['44px', '16px', '16px']);
+    expect(m('lg')).toEqual(['40px', '16px', '16px']);
     expect(box('bad').dataset.size).toBe('md');
   });
 

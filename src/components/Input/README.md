@@ -1,6 +1,6 @@
 # Input
 
-A single-line text field: a native `<input>` in a box that can hold icons. Three sizes at the control heights (24, 32 and 44px, like Button), a focus ring, and invalid, read-only and disabled states. Field colors come from the alias tokens (`field`, `field-border`, `placeholder`), so text keeps 4.5:1 and the border 3:1 in all six themes.
+A single-line text field: a native `<input>` in a box that can hold icons. Three sizes at the control heights (24, 32 and 40px, like Button), a focus ring, and invalid, read-only and disabled states. Field colors come from the alias tokens (`field`, `field-border`, `placeholder`), so text keeps 4.5:1 and the border 3:1 in all six themes.
 
 ```jsx
 const { Input } = window.Serupa;
@@ -57,7 +57,7 @@ const { Input } = window.Serupa;
 
 | Prop | Type | Default | What it does |
 | --- | --- | --- | --- |
-| `size` | `'sm'` \| `'md'` \| `'lg'` | `'md'` | 24px with `text-xs`, 32px with `text-sm`, 44px with `text-base` |
+| `size` | `'sm'` \| `'md'` \| `'lg'` | `'md'` | 24px with `text-xs`, 32px with `text-sm`, 40px with `text-base` |
 | `invalid` | boolean | `false` | A danger border and focus ring, and `aria-invalid` |
 | `leftIcon` | icon name or element | | A decorative icon before the text (14, 16 or 20px, in `text-muted`) |
 | `rightIcon` | icon name or element | | A decorative icon after the text |
@@ -79,7 +79,7 @@ Each is an optional override: set it on the page, a container or one input. The 
 | `--input-icon-color` | `text-muted` | Left and right icons |
 | `--input-focus-ring` | `focus-ring` | Border and ring while focused |
 | `--input-invalid` | `danger` | Border and ring when invalid |
-| `--input-height-sm` / `-md` / `-lg` | `control-height-sm` / `-md` / `-lg` | Heights (24, 32, 44px) |
+| `--input-height-sm` / `-md` / `-lg` | `control-height-sm` / `-md` / `-lg` | Heights (24, 32, 40px) |
 | `--input-icon-size-sm` / `-md` / `-lg` | `spacing-3.5` / `spacing-4` / `spacing-5` | Icon sizes (14, 16, 20px) |
 | `--input-padding-x-sm` / `-md` / `-lg` | `spacing-2` / `spacing-3` / `spacing-4` | Side padding (8, 12, 16px) |
 | `--input-gap` | `spacing-2` | Gap between an icon and the text (8px) |
