@@ -178,10 +178,20 @@
           }
         }
       },
+      "item-height": {
+        "$type": "dimension",
+        "$value": "{sizing.control-height-md}",
+        "$description": "An item's minimum height (32px; 28px with compact density). A two-line label grows it.",
+        "$extensions": {
+          "com.serupa": {
+            "cssVar": "--sidebar-item-height"
+          }
+        }
+      },
       "item-padding-y": {
         "$type": "dimension",
-        "$value": "{spacing.spacing-2}",
-        "$description": "An item's top and bottom padding (8px).",
+        "$value": "{spacing.spacing-1}",
+        "$description": "An item's top and bottom padding (4px); the minimum height sets the size.",
         "$extensions": {
           "com.serupa": {
             "cssVar": "--sidebar-item-padding-y"

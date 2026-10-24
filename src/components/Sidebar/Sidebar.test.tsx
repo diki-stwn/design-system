@@ -57,11 +57,11 @@ describe('Sidebar', () => {
     expect(rect(el('ftr')).bottom - top).toBeGreaterThan(560);
   });
 
-  test('items: links in list items, a 20px icon, text-sm font-medium, 8px by 12px padding; the current page has aria-current="page"', async () => {
+  test('items: links in list items, a 20px icon, text-sm font-medium, 4px by 12px padding; the current page has aria-current="page"', async () => {
     await render(<App />);
     const a = el('ihome'), s = css(a), icon = a.querySelector<HTMLElement>('.dk-icon')!;
     expect([a.tagName, a.parentElement!.tagName, a.getAttribute('aria-current'), icon.dataset.icon, css(icon).fontSize]).toEqual(['A', 'LI', 'page', 'home', '20px']);
-    expect([s.fontSize, s.fontWeight, s.paddingTop, s.paddingLeft]).toEqual(['14px', '500', '8px', '12px']);
+    expect([s.fontSize, s.fontWeight, s.paddingTop, s.paddingLeft]).toEqual(['14px', '500', '4px', '12px']);
   });
 
   test('muted items, shaded and text-colored on hover; the current page the same', async () => {
@@ -73,6 +73,13 @@ describe('Sidebar', () => {
     await userEvent.hover(el('iinbox'));
     await expect.poll(() => pick(el('iinbox'), keys)).toEqual(current);
     await away();
+  });
+
+  test('items are 32px (control-height-md), 28px with compact density', async () => {
+    await render(<App />);
+    expect(Math.round(rect(el('iinbox')).height)).toBe(32);
+    el('sb').setAttribute('data-density', 'compact');
+    await expect.poll(() => Math.round(rect(el('iinbox')).height)).toBe(28);
   });
 
   test('a badge sits at the end, 12px in', async () => {

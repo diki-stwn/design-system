@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------
    Sidebar: a 256px column (collapsed: a 64px icon rail) with a 1px line on its inner edge, the parent's height:
-   header, the scrolling items, then the footer at the bottom. Items are muted text-sm font-medium with a 20px
+   header, the scrolling items, then the footer at the bottom. Items are 32px (control-height-md), muted text-sm font-medium with a 20px
    icon, shaded on hover; the current page is shaded and text-colored. Nested items line up with their parent's
    label. Section titles are muted text-xs.
    --------------------------------------------------------------- */
@@ -19,8 +19,8 @@
 .dk-sidebar__list--nested { margin-top: var(--spacing-0\.5); }
 .dk-sidebar__list[hidden] { display: none; }
 .dk-sidebar__item {
-  box-sizing: border-box; display: flex; align-items: center; gap: var(--sidebar-item-gap, var(--spacing-3)); width: var(--sizing-full);
-  padding: var(--sidebar-item-padding-y, var(--spacing-2)) var(--sidebar-item-padding-x, var(--spacing-3)); border: var(--spacing-0); border-radius: var(--sidebar-item-radius, var(--rounded-md));
+  box-sizing: border-box; display: flex; align-items: center; gap: var(--sidebar-item-gap, var(--spacing-3)); width: var(--sizing-full); min-height: var(--sidebar-item-height, var(--control-height-md));
+  padding: var(--sidebar-item-padding-y, var(--spacing-1)) var(--sidebar-item-padding-x, var(--spacing-3)); border: var(--spacing-0); border-radius: var(--sidebar-item-radius, var(--rounded-md));
   background: transparent; color: var(--sidebar-item-text, var(--text-muted)); font-family: inherit; font-size: var(--sidebar-item-size, var(--text-sm)); line-height: var(--text-sm--line-height); font-weight: var(--sidebar-item-weight, var(--font-medium));
   text-align: start; text-decoration: none; cursor: pointer;
   transition: background-color var(--duration-150) var(--ease-in-out), color var(--duration-150) var(--ease-in-out);
