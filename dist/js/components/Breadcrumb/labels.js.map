@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/components/Breadcrumb/labels.ts"],
+  "sourcesContent": ["// Breadcrumb's own words, in English and Indonesian. tools/build/registry.mjs adds them to SerupaLabels,\n// enLabels and idLabels, so <SerupaProvider labels> changes them like any other label.\nexport interface BreadcrumbLabels {\n  /** Breadcrumb, and its \"\u2026\" button. */\n  breadcrumb: string;\n  showHiddenPages: string;\n}\nexport const en: BreadcrumbLabels = {\n  breadcrumb: \"Breadcrumb\",\n  showHiddenPages: \"Show all pages\",\n};\nexport const id: BreadcrumbLabels = {\n  breadcrumb: \"Navigasi jejak\",\n  showHiddenPages: \"Tampilkan semua halaman\",\n};\n"],
+  "mappings": ";AAOO,IAAM,KAAuB;AAAA,EAClC,YAAY;AAAA,EACZ,iBAAiB;AACnB;AACO,IAAM,KAAuB;AAAA,EAClC,YAAY;AAAA,EACZ,iBAAiB;AACnB;",
+  "names": []
+}

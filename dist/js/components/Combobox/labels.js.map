@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/components/Combobox/labels.ts"],
+  "sourcesContent": ["// Combobox's own words, in English and Indonesian. tools/build/registry.mjs adds them to SerupaLabels,\n// enLabels and idLabels, so <SerupaProvider labels> changes them like any other label.\nexport interface ComboboxLabels {\n  /** Combobox while loading options. */\n  loadingResults: string;\n  /** Combobox when nothing matches. */\n  noResults: string;\n}\nexport const en: ComboboxLabels = {\n  loadingResults: \"Loading\u2026\",\n  noResults: \"No results\",\n};\nexport const id: ComboboxLabels = {\n  loadingResults: \"Memuat\u2026\",\n  noResults: \"Tidak ada hasil\",\n};\n"],
+  "mappings": ";AAQO,IAAM,KAAqB;AAAA,EAChC,gBAAgB;AAAA,EAChB,WAAW;AACb;AACO,IAAM,KAAqB;AAAA,EAChC,gBAAgB;AAAA,EAChB,WAAW;AACb;",
+  "names": []
+}

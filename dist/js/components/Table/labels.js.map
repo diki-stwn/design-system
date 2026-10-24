@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/components/Table/labels.ts"],
+  "sourcesContent": ["// Table's own words, in English and Indonesian. tools/build/registry.mjs adds them to SerupaLabels,\n// enLabels and idLabels, so <SerupaProvider labels> changes them like any other label.\nexport interface TableLabels {\n  /** Table's scroll region when it has no caption. */\n  table: string;\n}\nexport const en: TableLabels = {\n  table: \"Table\",\n};\nexport const id: TableLabels = {\n  table: \"Tabel\",\n};\n"],
+  "mappings": ";AAMO,IAAM,KAAkB;AAAA,EAC7B,OAAO;AACT;AACO,IAAM,KAAkB;AAAA,EAC7B,OAAO;AACT;",
+  "names": []
+}

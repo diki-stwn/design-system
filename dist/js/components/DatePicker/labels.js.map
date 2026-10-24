@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/components/DatePicker/labels.ts"],
+  "sourcesContent": ["// DatePicker's own words, in English and Indonesian. tools/build/registry.mjs adds them to SerupaLabels,\n// enLabels and idLabels, so <SerupaProvider labels> changes them like any other label.\nexport interface DatePickerLabels {\n  /** DatePicker, DateRangePicker and TimePicker. */\n  chooseDate: string;\n}\nexport const en: DatePickerLabels = {\n  chooseDate: \"Choose a date\",\n};\nexport const id: DatePickerLabels = {\n  chooseDate: \"Pilih tanggal\",\n};\n"],
+  "mappings": ";AAMO,IAAM,KAAuB;AAAA,EAClC,YAAY;AACd;AACO,IAAM,KAAuB;AAAA,EAClC,YAAY;AACd;",
+  "names": []
+}

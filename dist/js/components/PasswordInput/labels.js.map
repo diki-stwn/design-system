@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/components/PasswordInput/labels.ts"],
+  "sourcesContent": ["// PasswordInput's own words, in English and Indonesian. tools/build/registry.mjs adds them to SerupaLabels,\n// enLabels and idLabels, so <SerupaProvider labels> changes them like any other label.\nexport interface PasswordInputLabels {\n  /** PasswordInput show/hide button. */\n  showPassword: string;\n}\nexport const en: PasswordInputLabels = {\n  showPassword: \"Show password\",\n};\nexport const id: PasswordInputLabels = {\n  showPassword: \"Tampilkan kata sandi\",\n};\n"],
+  "mappings": ";AAMO,IAAM,KAA0B;AAAA,EACrC,cAAc;AAChB;AACO,IAAM,KAA0B;AAAA,EACrC,cAAc;AAChB;",
+  "names": []
+}

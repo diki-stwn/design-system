@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/components/FileUpload/labels.ts"],
+  "sourcesContent": ["// FileUpload's own words, in English and Indonesian. tools/build/registry.mjs adds them to SerupaLabels,\n// enLabels and idLabels, so <SerupaProvider labels> changes them like any other label.\nexport interface FileUploadLabels {\n  /** FileUpload. */\n  dragFiles: string;\n  dragFile: string;\n  chooseFiles: string;\n  chooseFile: string;\n  chosenFiles: string;\n  chosenFile: string;\n}\nexport const en: FileUploadLabels = {\n  dragFiles: \"Drag files here\",\n  dragFile: \"Drag a file here\",\n  chooseFiles: \"Choose files\",\n  chooseFile: \"Choose a file\",\n  chosenFiles: \"Chosen files\",\n  chosenFile: \"Chosen file\",\n};\nexport const id: FileUploadLabels = {\n  dragFiles: \"Seret file ke sini\",\n  dragFile: \"Seret file ke sini\",\n  chooseFiles: \"Pilih file\",\n  chooseFile: \"Pilih file\",\n  chosenFiles: \"File yang dipilih\",\n  chosenFile: \"File yang dipilih\",\n};\n"],
+  "mappings": ";AAWO,IAAM,KAAuB;AAAA,EAClC,WAAW;AAAA,EACX,UAAU;AAAA,EACV,aAAa;AAAA,EACb,YAAY;AAAA,EACZ,aAAa;AAAA,EACb,YAAY;AACd;AACO,IAAM,KAAuB;AAAA,EAClC,WAAW;AAAA,EACX,UAAU;AAAA,EACV,aAAa;AAAA,EACb,YAAY;AAAA,EACZ,aAAa;AAAA,EACb,YAAY;AACd;",
+  "names": []
+}

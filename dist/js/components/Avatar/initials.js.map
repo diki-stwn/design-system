@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/components/Avatar/initials.ts"],
+  "sourcesContent": ["// In its own module, without \"use client\", so a Server Component can call it (a function from a client module is\n// only a reference there). Avatar.tsx re-exports it.\n\n/** The initials of a name: the first letters of the first and last words (\"Ada Lovelace\" \u2192 \"AL\"), or one letter. */\nexport function initials(name?: string): string {\n  const words = (name || \"\").trim().split(/\\s+/).filter(Boolean);\n  if (!words.length) return \"\";\n  const first = Array.from(words[0])[0] || \"\";\n  const last = words.length > 1 ? Array.from(words[words.length - 1])[0] || \"\" : \"\";\n  return (first + last).toUpperCase();\n}\n"],
+  "mappings": ";AAIO,SAAS,SAAS,MAAuB;AAC9C,QAAM,SAAS,QAAQ,IAAI,KAAK,EAAE,MAAM,KAAK,EAAE,OAAO,OAAO;AAC7D,MAAI,CAAC,MAAM,OAAQ,QAAO;AAC1B,QAAM,QAAQ,MAAM,KAAK,MAAM,CAAC,CAAC,EAAE,CAAC,KAAK;AACzC,QAAM,OAAO,MAAM,SAAS,IAAI,MAAM,KAAK,MAAM,MAAM,SAAS,CAAC,CAAC,EAAE,CAAC,KAAK,KAAK;AAC/E,UAAQ,QAAQ,MAAM,YAAY;AACpC;",
+  "names": []
+}
