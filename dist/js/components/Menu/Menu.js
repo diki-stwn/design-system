@@ -1,0 +1,181 @@
+"use client";
+
+// src/components/Menu/Menu.tsx
+import * as React from "react";
+import { cn, domId, elementRef, omit, setRef, useIsoLayoutEffect } from "../../internal/cn.js";
+import { config } from "../../internal/config.js";
+import { typeahead } from "../../internal/typeahead.js";
+import { useAnchoredLayer } from "../../internal/useAnchoredLayer.js";
+import { asIcon } from "../Icon/asIcon.js";
+import { component, named } from "../../internal/component.js";
+import { isComposing } from "../../internal/ime.js";
+var MenuContext = /* @__PURE__ */ React.createContext(null);
+var ITEMS = '[role="menuitem"]';
+var Menu = /* @__PURE__ */ named("Menu", function Menu2(props) {
+  const id = domId("dk-menu", React.useId());
+  const [inner, setInner] = React.useState(false);
+  const controlled = props.open !== void 0;
+  const open = controlled ? !!props.open : inner;
+  const menuRef = React.useRef(null);
+  const triggerRef = React.useRef(null);
+  const focusOn = React.useRef(null);
+  const typed = React.useRef({ text: "", at: 0 });
+  const ask = React.useRef(props.onOpenChange);
+  ask.current = props.onOpenChange;
+  const set = React.useCallback((v) => {
+    if (!controlled) setInner(v);
+    if (ask.current) ask.current(v);
+  }, [controlled]);
+  const close = React.useCallback((focusTrigger) => {
+    set(false);
+    if (focusTrigger && triggerRef.current) triggerRef.current.focus();
+  }, [set]);
+  const ctx = React.useMemo(() => ({ close }), [close]);
+  const items = () => menuRef.current ? Array.from(menuRef.current.querySelectorAll(ITEMS)) : [];
+  useAnchoredLayer(open, menuRef, triggerRef, { placement: props.placement, fallback: "bottom-start", offsetVar: "--dk-menu-offset", onOutside: () => close(false), inside: triggerRef });
+  useIsoLayoutEffect(() => {
+    const menu = menuRef.current;
+    if (!open || !menu) return;
+    const list = items();
+    const target = focusOn.current === "last" ? list[list.length - 1] : list[0];
+    focusOn.current = null;
+    if (target) target.focus();
+    else menu.focus();
+  }, [open]);
+  const onMenuKey = (e) => {
+    if (isComposing(e)) return;
+    const list = items(), i = list.indexOf(document.activeElement);
+    const go = (n) => {
+      e.preventDefault();
+      if (list.length) list[(n + list.length) % list.length].focus();
+    };
+    if (e.key === "ArrowDown") go(i + 1);
+    else if (e.key === "ArrowUp") go(i < 0 ? list.length - 1 : i - 1);
+    else if (e.key === "Home") go(0);
+    else if (e.key === "End") go(list.length - 1);
+    else if (e.key === "Escape") {
+      e.preventDefault();
+      e.stopPropagation();
+      close(true);
+    } else if (e.key === "Tab") close(false);
+    else if (e.key.length === 1 && /\S/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      const n = typeahead(typed.current, e.key, list.map((it) => (it.querySelector(".dk-menu__label") || it).textContent || ""), i);
+      if (n >= 0) list[n].focus();
+    }
+  };
+  const child = React.Children.only(props.trigger);
+  const cp = child.props;
+  const childRef = elementRef(child);
+  const trigger = React.cloneElement(child, {
+    ref: (n) => {
+      triggerRef.current = n;
+      if (childRef) setRef(childRef, n);
+    },
+    id: cp.id || id + "-button",
+    "aria-haspopup": "menu",
+    "aria-expanded": open,
+    "aria-controls": open ? id : void 0,
+    onClick: (e) => {
+      if (cp.onClick) cp.onClick(e);
+      if (e.defaultPrevented) return;
+      if (!open) focusOn.current = "first";
+      set(!open);
+    },
+    onKeyDown: (e) => {
+      if (cp.onKeyDown) cp.onKeyDown(e);
+      if (e.defaultPrevented) return;
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        focusOn.current = e.key === "ArrowUp" ? "last" : "first";
+        set(true);
+      }
+    }
+  });
+  return /* @__PURE__ */ React.createElement(MenuContext.Provider, { value: ctx }, trigger, /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      ref: menuRef,
+      id,
+      role: "menu",
+      tabIndex: -1,
+      ...{ popover: "manual" },
+      hidden: !open || void 0,
+      "aria-label": props["aria-label"],
+      "aria-labelledby": props["aria-label"] ? void 0 : cp.id || id + "-button",
+      className: cn("dk-menu", props.className),
+      style: props.style,
+      "data-component": "menu",
+      "data-state": open ? "open" : "closed",
+      onKeyDown: onMenuKey
+    },
+    open ? props.children : null
+  ));
+});
+var MenuItem = /* @__PURE__ */ component("MenuItem", function MenuItem2(props, ref) {
+  const ctx = React.useContext(MenuContext);
+  const rest = omit(props, { onSelect: 1, icon: 1, shortcut: 1, destructive: 1, disabled: 1, className: 1, children: 1, onClick: 1, onKeyDown: 1, onPointerMove: 1 });
+  const own = { onClick: props.onClick, onKeyDown: props.onKeyDown, onPointerMove: props.onPointerMove };
+  const choose = (e) => {
+    if (props.disabled) {
+      e.preventDefault();
+      return;
+    }
+    if (props.onSelect) props.onSelect(e);
+    if (!e.defaultPrevented && ctx) ctx.close(true);
+  };
+  const onClick = (e) => {
+    if (own.onClick) own.onClick(e);
+    if (rest.href != null && !props.disabled) {
+      if (props.onSelect) props.onSelect(e);
+      if (ctx) ctx.close(false);
+      return;
+    }
+    choose(e);
+  };
+  const onKeyDown = (e) => {
+    if (own.onKeyDown) own.onKeyDown(e);
+    if (e.defaultPrevented) return;
+    if (e.key === "Enter" || e.key === " ") {
+      if (rest.href != null && e.key === "Enter" && !props.disabled) return;
+      choose(e);
+      e.preventDefault();
+    }
+  };
+  const isLink = rest.href != null && !props.disabled;
+  if (!isLink) delete rest.href;
+  if (isLink && rest.target === "_blank" && rest.rel == null) rest.rel = "noopener noreferrer";
+  return React.createElement(
+    isLink ? config.link : "div",
+    Object.assign(rest, {
+      ref,
+      role: "menuitem",
+      tabIndex: -1,
+      "aria-disabled": props.disabled || void 0,
+      className: cn("dk-menu__item", props.destructive && "dk-menu__item--destructive", props.className),
+      onClick,
+      onKeyDown,
+      onPointerMove: (e) => {
+        if (own.onPointerMove) own.onPointerMove(e);
+        if (document.activeElement !== e.currentTarget) e.currentTarget.focus();
+      }
+    }),
+    props.icon != null ? /* @__PURE__ */ React.createElement("span", { className: "dk-menu__icon", "aria-hidden": "true" }, asIcon(props.icon)) : null,
+    /* @__PURE__ */ React.createElement("span", { className: "dk-menu__label" }, props.children),
+    props.shortcut ? /* @__PURE__ */ React.createElement("kbd", { className: "dk-menu__shortcut" }, props.shortcut) : null
+  );
+});
+var MenuGroup = /* @__PURE__ */ component("MenuGroup", function MenuGroup2(props, ref) {
+  const rest = omit(props, { label: 1, className: 1, children: 1 });
+  const id = domId("dk-mg", React.useId());
+  return /* @__PURE__ */ React.createElement("div", { ...rest, ref, role: "group", "aria-labelledby": props.label != null ? id : void 0, className: cn("dk-menu__group", props.className) }, props.label != null ? /* @__PURE__ */ React.createElement("div", { className: "dk-menu__group-label", id, role: "presentation" }, props.label) : null, props.children);
+});
+var MenuSeparator = /* @__PURE__ */ component("MenuSeparator", function MenuSeparator2(props, ref) {
+  return /* @__PURE__ */ React.createElement("div", { ...props, ref, role: "separator", className: cn("dk-menu__separator", props.className) });
+});
+export {
+  Menu,
+  MenuGroup,
+  MenuItem,
+  MenuSeparator
+};
+//# sourceMappingURL=Menu.js.map
