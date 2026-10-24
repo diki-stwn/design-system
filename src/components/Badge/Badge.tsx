@@ -47,7 +47,7 @@ export interface BadgeProps extends Omit<React.HTMLAttributes<HTMLElement>, 'onC
   type?: 'button' | 'submit' | 'reset';
   /** A ring replaces the content (the width stays); aria-busy, and an interactive badge ignores clicks but keeps focus. */
   loading?: boolean;
-  /** Announced to screen readers when loading starts. Default "Loading"; "" announces nothing. */
+  /** Announced to screen readers when loading starts. Default "Loading…"; "" announces nothing. */
   loadingText?: string;
 }
 
@@ -59,7 +59,7 @@ export interface BadgeProps extends Omit<React.HTMLAttributes<HTMLElement>, 'onC
    name is removeLabel + the label, "Remove Design"). Interactive: with onClick it renders a <button type="button">,
    with href a link (the configured link component, like Button), and only then has hover, focus and active
    states and Button's micro-interactions (press, ripple). loading cross-fades the content to a centered ring (the width stays), sets aria-busy, announces
-   loadingText ("Loading") and, on an interactive badge, blocks clicks while keeping focus. */
+   loadingText ("Loading…") and, on an interactive badge, blocks clicks while keeping focus. */
 const VARIANTS: readonly BadgeVariant[] = ["subtle", "solid", "outline"];
 const TONES: readonly BadgeTone[] = ["neutral", "primary", "success", "warning", "danger", "info", "red", "orange", "amber", "yellow", "lime", "green", "emerald", "teal", "cyan", "sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink", "rose"];
 const OWN = { variant: 1, tone: 1, size: 1, dot: 1, ping: 1, leftIcon: 1, count: 1, max: 1, showZero: 1, onRemove: 1, removeLabel: 1, loading: 1, loadingText: 1, className: 1, children: 1 } as const;
@@ -71,7 +71,7 @@ export const Badge = /* @__PURE__ */ component<HTMLElement, BadgeProps>("Badge",
   const tone = oneOf(TONES, props.tone, "neutral");
   if (props.size != null) warnOnce("badge-size", "Badge: size was removed in 4.0.0; badges have one size (20px, text-xs). Remove the size prop.");   // still swallowed, so it never reaches the DOM
   const loading = !!props.loading;
-  const loadingText = props.loadingText == null ? "Loading" : props.loadingText;
+  const loadingText = props.loadingText == null ? "Loading…" : props.loadingText;
   // Hooks first: a count of 0 renders nothing below, and hooks must run on every render.
   React.useEffect(function () { ensureAnnouncer(); }, []);   // no cleanup: the region is shared
   // Announces only when loading starts: a new loadingText while it loads re-runs this but announces nothing.
