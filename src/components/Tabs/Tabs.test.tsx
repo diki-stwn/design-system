@@ -36,7 +36,7 @@ function App(props: { tref?: React.Ref<HTMLDivElement> }) {
     <Tabs id="dis" activation="manual"><Set3 dis /></Tabs>
     <div dir="rtl"><Tabs id="rtl"><Set3 /></Tabs></div>
     {/* @ts-expect-error: an unknown variant and size, as plain JavaScript could pass */}
-    <Tabs id="bad" variant="boxed" size="xl" style={{ '--tabs-indicator': 'rgb(1, 2, 3)', '--tabs-height-md': '40px' } as React.CSSProperties}><Set3 /></Tabs>
+    <Tabs id="bad" variant="boxed" size="xl" style={{ '--tabs-indicator': 'rgb(1, 2, 3)', '--tabs-height-md': '44px' } as React.CSSProperties}><Set3 /></Tabs>
   </div>;
 }
 const setup = async (tref?: React.Ref<HTMLDivElement>) => { changes = []; await render(<App tref={tref} />); await expect.poll(() => !!selected('un')).toBe(true); };
@@ -113,10 +113,10 @@ describe('Tabs', () => {
     expect(focused()).toBe('Two');
   });
 
-  test('line: a 1px border under the row, 36px tabs (text-sm, font-medium, 12px sides), a 2px primary line under the selected one, whose label is darker; 16px icons', async () => {
+  test('line: a 1px border under the row, 40px tabs (text-sm, font-medium, 12px sides), a 2px primary line under the selected one, whose label is darker; 16px icons', async () => {
     await setup();
     const r = el('un'), sel = selected('un'), other = r.querySelector('[aria-selected="false"]')!, a = getComputedStyle(sel, '::after'), s = css(sel);
-    expect([css(r.querySelector('[role="tablist"]')).borderBottomWidth, sel.getBoundingClientRect().height, a.height, a.backgroundColor]).toEqual(['1px', 36, '2px', color('var(--primary)')]);
+    expect([css(r.querySelector('[role="tablist"]')).borderBottomWidth, sel.getBoundingClientRect().height, a.height, a.backgroundColor]).toEqual(['1px', 40, '2px', color('var(--primary)')]);
     expect([s.fontSize, s.fontWeight, s.paddingLeft, css(sel.querySelector('.dk-icon')).fontSize]).toEqual(['14px', '500', '12px', '16px']);
     await expect.poll(() => css(sel).color).not.toBe(css(other).color);
   });
@@ -131,7 +131,7 @@ describe('Tabs', () => {
   test('unknown variant and size fall back to line and md; --tabs-indicator and --tabs-height-md override', async () => {
     await setup();
     const sel = selected('bad');
-    expect([el('bad').dataset.variant, Math.round(sel.getBoundingClientRect().height), getComputedStyle(sel, '::after').backgroundColor]).toEqual(['line', 40, 'rgb(1, 2, 3)']);
+    expect([el('bad').dataset.variant, Math.round(sel.getBoundingClientRect().height), getComputedStyle(sel, '::after').backgroundColor]).toEqual(['line', 44, 'rgb(1, 2, 3)']);
   });
 
   test('focus from the keyboard: a 2px focus-ring inside the tab', async () => {
