@@ -32,7 +32,7 @@ interface ButtonOwnProps {
   icon?: IconSource;
   /** Shows a centered Loader (ring) and blocks clicks, keys and Enter-key form submission while an action runs, so a request can't be sent twice. Keeps size, colors and keyboard focus; sets aria-busy, aria-disabled and data-loading. Default: false. */
   loading?: boolean;
-  /** Announced to screen readers (polite status region) when loading starts. Default: 'Loading'. Pass '' to stay silent. */
+  /** Announced to screen readers (polite status region) when loading starts. Default: 'Loading…'. Pass '' to stay silent. */
   loadingText?: string;
 }
 
@@ -83,7 +83,7 @@ export const ButtonBase = /* @__PURE__ */ component<HTMLElement, ButtonProps>("B
   }
   const loading = !!props.loading;
   const disabled = !!rest.disabled;
-  const loadingText = props.loadingText == null ? "Loading" : props.loadingText;
+  const loadingText = props.loadingText == null ? "Loading…" : props.loadingText;
   React.useEffect(function () { ensureAnnouncer(); }, []);   // no cleanup: the region is shared
   const wasLoading = React.useRef(false);
   // Announced when loading starts, with the text it has then (a later loadingText change isn't announced again).
