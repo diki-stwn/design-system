@@ -116,8 +116,8 @@
       },
       "height-md": {
         "$type": "dimension",
-        "$value": "{spacing.spacing-9}",
-        "$description": "A tab's height with size=\"md\", the default (36px).",
+        "$value": "{sizing.control-height-lg}",
+        "$description": "A tab's height with size=\"md\", the default (40px; 36px with compact density).",
         "$extensions": {
           "com.serupa": {
             "cssVar": "--tabs-height-md"
