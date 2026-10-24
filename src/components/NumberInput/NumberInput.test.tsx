@@ -116,10 +116,10 @@ describe('NumberInput', () => {
     expect([field('dis').value, steps('dis').every((b) => b.disabled)]).toEqual(['3', true]);
   });
 
-  test('lg: 44px with 20px icons', async () => {
+  test('lg: 40px with 20px icons', async () => {
     await render(<NumberInput id="lg" aria-label="Lg" size="lg" defaultValue={1} />);
     const box = field('lg').parentElement!;
-    expect([Math.round(box.getBoundingClientRect().height), css(box.querySelector('.dk-number-input__step .dk-icon')).fontSize]).toEqual([44, '20px']);
+    expect([Math.round(box.getBoundingClientRect().height), css(box.querySelector('.dk-number-input__step .dk-icon')).fontSize]).toEqual([40, '20px']);
   });
 
   test('contrast: the − and + keep 3:1 and the number 4.5:1 on the field in all six themes', async () => {

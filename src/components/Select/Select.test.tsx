@@ -32,7 +32,7 @@ describe('Select', () => {
     expect([b.height, f.fontSize, f.paddingLeft, f.paddingRight, b.borderTopWidth, b.borderRadius]).toEqual(['32px', '14px', '12px', '36px', '1px', '6px']);
   });
 
-  test('sizes: sm 24px text-xs, lg 44px text-base; an unknown size falls back to md; multiple is ignored with a warning', async () => {
+  test('sizes: sm 24px text-xs, lg 40px text-base; an unknown size falls back to md; multiple is ignored with a warning', async () => {
     await render(<Grid>
       <Select id="sm" size="sm" options={['x']} aria-label="Small" />
       <Select id="lg" size="lg" options={['x']} aria-label="Large" />
@@ -41,7 +41,7 @@ describe('Select', () => {
     </Grid>);
     const m = (id: string) => [css(box(id)).height, css(field(id)).fontSize, css(field(id)).paddingLeft];
     expect(m('sm')).toEqual(['24px', '12px', '8px']);
-    expect(m('lg')).toEqual(['44px', '16px', '16px']);
+    expect(m('lg')).toEqual(['40px', '16px', '16px']);
     expect([box('bad').dataset.size, field('bad').multiple]).toEqual(['md', false]);
     expect(warnings.mock.calls.some((c: unknown[]) => /multiple/.test(String(c[0])))).toBe(true);
   });

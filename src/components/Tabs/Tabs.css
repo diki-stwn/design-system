@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------
    Tabs: a row of tabs (.dk-tabs__list > .dk-tabs__tab) over panels (.dk-tabs__panel). line (default): a border
    under the row and a 2px primary line under the selected tab, whose label turns from text-muted to text.
-   pill: no border; the selected tab is filled in primary. Tabs are 36px tall (32px with size sm), text-sm,
+   pill: no border; the selected tab is filled in primary. Tabs are 40px tall (32px with size sm; 36 and 28 with compact density), text-sm,
    font-medium. A 2px focus ring, 50% when disabled. Every value goes through --tabs-* tokens.
    --------------------------------------------------------------- */
 @layer dk.components {
@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--tabs-icon-gap, var(--spacing-2));
-  height: var(--tabs-height-md, var(--spacing-9));
+  height: var(--tabs-height-md, var(--control-height-lg));
   padding: var(--spacing-0) var(--tabs-padding-x, var(--spacing-3));
   margin: var(--spacing-0);
   border: var(--spacing-0);

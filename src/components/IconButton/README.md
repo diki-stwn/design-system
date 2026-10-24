@@ -46,7 +46,7 @@ const { IconButton } = window.Serupa;
 | `noTitle` | boolean | `false` | Leaves out the `title`, when a Tooltip already shows the label |
 | `variant` | as Button | `'ghost'` | Ghost by default, the usual look for an icon on its own |
 
-Every other Button prop works the same: `size` (24, 32 or 44px square), `destructive`, `loading`, `disabled`, `href`, `onClick`, `ref`. A given `title` wins over the label.
+Every other Button prop works the same: `size` (24, 32 or 40px square), `destructive`, `loading`, `disabled`, `href`, `onClick`, `ref`. A given `title` wins over the label.
 
 ## Component tokens
 

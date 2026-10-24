@@ -39,7 +39,7 @@ describe('IconButton', () => {
     await render(<Icons />);
     const s = css(el('ibr'));
     expect(parseFloat(s.borderTopLeftRadius)).toBeGreaterThanOrEqual(22);
-    expect([s.width, s.height, el('ibr').dataset.variant]).toEqual(['44px', '44px', 'secondary']);
+    expect([s.width, s.height, el('ibr').dataset.variant]).toEqual(['40px', '40px', 'secondary']);
   });
 
   test('with href it is a link; noTitle leaves out the tooltip; a given title wins; destructive passes through', async () => {

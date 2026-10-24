@@ -43,7 +43,7 @@ const { PasswordInput, Field } = window.Serupa;
 | `defaultVisible` | boolean | `false` | Shows it at first (uncontrolled) |
 | `onVisibleChange` | `(visible) => void` | none | Called when the button is pressed |
 | `toggleLabel` | string | `"Show password"` | The button's name |
-| `size` | `'sm'` \| `'md'` \| `'lg'` | `'md'` | 24, 32 or 44px, like Input |
+| `size` | `'sm'` \| `'md'` \| `'lg'` | `'md'` | 24, 32 or 40px, like Input |
 | `invalid` | boolean | `false` | A danger border and `aria-invalid` |
 | `leftIcon` | an icon name or element | none | A decorative icon before the text |
 

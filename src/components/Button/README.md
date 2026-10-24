@@ -74,9 +74,9 @@ Hover fills use `danger-hover`, `danger-subtle-hover` and `danger-subtle`; keybo
 | --- | --- | --- | --- | --- | --- |
 | `sm` | 24px (`control-height-sm`) | 8px | `text-xs` (12px) | 14px | 4px |
 | `md` *(default)* | 32px (`control-height-md`) | 12px | `text-sm` (14px) | 16px | 6px |
-| `lg` | 44px (`control-height-lg`) | 20px | `text-base` (16px) | 20px | 8px |
+| `lg` | 40px (`control-height-lg`) | 20px | `text-base` (16px) | 20px | 8px |
 
-All sizes use `font-medium` and `rounded-md`. `primary`, `secondary` and `outline` buttons (and their destructive versions) carry `shadow-xs` (a 1px, 5% black shadow); `ghost` and `link` stay flat, and disabled buttons drop the shadow. Use `lg` where touch matters: 44px is the minimum comfortable tap target. `sm` belongs in dense desktop UI like tables and toolbars.
+All sizes use `font-medium` and `rounded-md`. `primary`, `secondary` and `outline` buttons (and their destructive versions) carry `shadow-xs` (a 1px, 5% black shadow); `ghost` and `link` stay flat, and disabled buttons drop the shadow. Where touch matters, use `lg` (40px), or set `--button-height-lg: var(--control-height-xl)` for 48px, above the 44px comfortable tap target. `sm` belongs in dense desktop UI like tables and toolbars.
 
 ### Content
 
@@ -87,7 +87,7 @@ A button holds a label, an icon beside a label, or an icon alone:
 | Label only | `children` | Text |
 | Left icon | `leftIcon` + `children` | Icon, then text |
 | Right icon | `rightIcon` + `children` | Text, then icon |
-| Icon only | `icon` + `aria-label` | A square: 24, 32 or 44px |
+| Icon only | `icon` + `aria-label` | A square: 24, 32 or 40px |
 
 **Optical balance.** An icon reads lighter than text, so a button with one icon adds 4px of padding on the text side:
 
@@ -202,7 +202,7 @@ Button's behaviour follows web standards; its look comes only from this design s
 | Icon-only buttons need an `aria-label` (warns without one); icons are `aria-hidden` | [WCAG 4.1.2 Name, Role, Value](https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html), [WCAG 1.1.1 Non-text Content](https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html) |
 | An `aria-label` on a button with visible text should start with that text ("Delete project", not "Remove") | [WCAG 2.5.3 Label in Name](https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html) |
 | Visible keyboard focus, also in forced-colors (high-contrast) mode | [WCAG 2.4.7 Focus Visible](https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html), [WCAG 2.4.11 Focus Not Obscured](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html) |
-| Every size is at least 24×24px; use `lg` (44px) on touch-first screens | [WCAG 2.5.8 Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html), [WCAG 2.5.5 Target Size (Enhanced)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html) |
+| Every size is at least 24×24px; use `lg` (40px) or a 48px `--button-height-lg: var(--control-height-xl)` on touch-first screens | [WCAG 2.5.8 Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html), [WCAG 2.5.5 Target Size (Enhanced)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html) |
 | Under reduced motion the spinner turns slower with a steady arc, and press, nudge and ripple are off | [WCAG 2.3.3 Animation from Interactions](https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html) |
 | Toggle buttons pass `aria-pressed`; menu buttons pass `aria-haspopup`, `aria-expanded` and `aria-controls` | [APG: Button pattern (toggle)](https://www.w3.org/WAI/ARIA/apg/patterns/button/), [APG: Menu Button pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/) |
 
@@ -286,7 +286,7 @@ Override with tokens (`var(--rounded-full)`), not raw values, so the result stil
 | --- | --- | --- |
 | `--button-height-sm` | `control-height-sm` | Height, sm (24px); also the width of an icon-only sm button. |
 | `--button-height-md` | `control-height-md` | Height, md (32px); also the width of an icon-only md button. |
-| `--button-height-lg` | `control-height-lg` | Height, lg (44px); also the width of an icon-only lg button. |
+| `--button-height-lg` | `control-height-lg` | Height, lg (40px); also the width of an icon-only lg button. |
 | `--button-icon-size-sm` | `spacing-3.5` | Icon size, sm (14px). |
 | `--button-icon-size-md` | `spacing-4` | Icon size, md (16px). |
 | `--button-icon-size-lg` | `spacing-5` | Icon size, lg (20px). |

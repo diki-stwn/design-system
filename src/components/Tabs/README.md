@@ -66,7 +66,7 @@ const { Tabs, TabList, Tab, TabPanel } = window.Serupa;
 | `defaultValue` | string | the first enabled tab | The tab selected at first (uncontrolled) |
 | `onValueChange` | `(value) => void` | | Called when a tab is chosen |
 | `variant` | `'line'` \| `'pill'` | `'line'` | A line under the selected tab, or the selected tab filled in `primary` |
-| `size` | `'sm'` \| `'md'` | `'md'` | 32px or 36px tabs |
+| `size` | `'sm'` \| `'md'` | `'md'` | 32px or 40px tabs (28 or 36 with compact density) |
 | `activation` | `'auto'` \| `'manual'` | `'auto'` | Whether arrow keys also select, or only move (then Enter or Space selects). Use manual when a panel is slow to show |
 
 ### TabList, Tab and TabPanel
@@ -94,7 +94,7 @@ Each is an optional override: set it on the page, a container or one set of tabs
 | `--tabs-focus-ring` | `focus-ring` | The keyboard focus ring, on a tab and on the panel. |
 | `--tabs-focus-gap-color` | `surface` | The gap between the focus ring and the selected pill's fill. |
 | `--tabs-height-sm` | `control-height-md` | A tab's height with size="sm" (32px). |
-| `--tabs-height-md` | `spacing-9` | A tab's height with size="md", the default (36px). |
+| `--tabs-height-md` | `control-height-lg` | A tab's height with size="md", the default (40px; 36px with compact density). |
 | `--tabs-indicator-width` | `border-width-2` | The thickness of the selected tab's line (2px). |
 | `--tabs-radius` | `rounded-md` | A tab's corners (6px): the focus ring, and the pills. |
 | `--tabs-padding-x` | `spacing-3` | Padding at a tab's sides (12px). |

@@ -6837,6 +6837,19 @@
         }
       }
     },
+    "control-height-xs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.25,
+        "unit": "rem"
+      },
+      "$description": "Height of extra-small controls (20px): chips, tags and inline toggles inside dense rows. Below the 24px target, so give it 24px of spacing or use it where a larger target sits nearby.",
+      "$extensions": {
+        "com.serupa": {
+          "cssVar": "--control-height-xs"
+        }
+      }
+    },
     "control-height-sm": {
       "$type": "dimension",
       "$value": {
@@ -6866,13 +6879,26 @@
     "control-height-lg": {
       "$type": "dimension",
       "$value": {
-        "value": 2.75,
+        "value": 2.5,
         "unit": "rem"
       },
-      "$description": "Height of large controls (44px), the comfortable touch target (WCAG 2.5.5).",
+      "$description": "Height of large controls (40px): `lg` buttons and inputs, line tabs, menu items with a description.",
       "$extensions": {
         "com.serupa": {
           "cssVar": "--control-height-lg"
+        }
+      }
+    },
+    "control-height-xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 3,
+        "unit": "rem"
+      },
+      "$description": "Height of extra-large controls (48px): touch-first screens and hero calls to action. Above the 44px comfortable touch target (WCAG 2.5.5).",
+      "$extensions": {
+        "com.serupa": {
+          "cssVar": "--control-height-xl"
         }
       }
     }
