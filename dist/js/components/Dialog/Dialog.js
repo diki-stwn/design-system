@@ -1,0 +1,106 @@
+"use client";
+
+// src/components/Dialog/Dialog.tsx
+import * as React from "react";
+import { cn, domId, oneOf, omit, setRef, useIsoLayoutEffect } from "../../internal/cn.js";
+import { IconButton } from "../IconButton/IconButton.js";
+import { component } from "../../internal/component.js";
+import { useSerupa } from "../../internal/provider.js";
+import { modalClosed, modalOpened, modalOpening } from "../../internal/layers.js";
+import * as icons from "../../material/builtin.js";
+var OWN = { open: 1, onOpenChange: 1, title: 1, description: 1, footer: 1, size: 1, alert: 1, closeButton: 1, closeLabel: 1, closeOnBackdrop: 1, className: 1, children: 1 };
+var Dialog = /* @__PURE__ */ component("Dialog", function Dialog2(props, ref) {
+  const sds = useSerupa();
+  const rest = omit(props, OWN);
+  const base = domId("dk-dlg", React.useId());
+  const el = React.useRef(null);
+  const back = React.useRef(null);
+  const size = oneOf(["sm", "md", "lg"], props.size, "md");
+  const alert = !!props.alert;
+  const showClose = props.closeButton != null ? props.closeButton : !alert;
+  const backdrop = props.closeOnBackdrop != null ? props.closeOnBackdrop : !alert;
+  const ask = React.useRef(props.onOpenChange);
+  ask.current = props.onOpenChange;
+  const close = React.useCallback(() => {
+    if (ask.current) ask.current(false);
+  }, []);
+  const has = (n) => n != null && n !== false && n !== "";
+  useIsoLayoutEffect(() => {
+    const d = el.current;
+    if (!d) return;
+    if (props.open && !d.open) {
+      back.current = document.activeElement;
+      modalOpening();
+      if (typeof d.showModal === "function") d.showModal();
+      else d.setAttribute("open", "");
+      modalOpened(d);
+    } else if (!props.open && d.open) {
+      if (typeof d.close === "function") d.close();
+      else d.removeAttribute("open");
+      modalClosed(d);
+      const b = back.current;
+      back.current = null;
+      if (b && b.isConnected && typeof b.focus === "function") b.focus();
+    }
+  }, [props.open]);
+  React.useEffect(() => {
+    const d = el.current;
+    return () => {
+      if (d) modalClosed(d);
+      const b = back.current;
+      if (b && b.isConnected) b.focus();
+    };
+  }, []);
+  const onCancel = (e) => {
+    if (rest.onCancel) rest.onCancel(e);
+    e.preventDefault();
+    close();
+  };
+  const openNow = React.useRef(props.open);
+  openNow.current = props.open;
+  const onClose = (e) => {
+    if (rest.onClose) rest.onClose(e);
+    if (!e.currentTarget.open) modalClosed(e.currentTarget);
+    if (!openNow.current || e.currentTarget.open) return;
+    const b = back.current;
+    back.current = null;
+    if (b && b.isConnected && typeof b.focus === "function") b.focus();
+    close();
+  };
+  const downOnBackdrop = React.useRef(false);
+  const onPointerDown = (e) => {
+    if (rest.onPointerDown) rest.onPointerDown(e);
+    downOnBackdrop.current = e.target === e.currentTarget;
+  };
+  const onClick = (e) => {
+    if (rest.onClick) rest.onClick(e);
+    if (backdrop && downOnBackdrop.current && e.target === e.currentTarget) close();
+    downOnBackdrop.current = false;
+  };
+  return /* @__PURE__ */ React.createElement(
+    "dialog",
+    {
+      ...rest,
+      ref: (n) => {
+        el.current = n;
+        setRef(ref, n);
+      },
+      role: alert ? "alertdialog" : void 0,
+      "aria-modal": "true",
+      "aria-labelledby": rest["aria-labelledby"] || (has(props.title) ? base + "-title" : void 0),
+      "aria-describedby": rest["aria-describedby"] || (has(props.description) ? base + "-desc" : void 0),
+      className: cn("dk-dialog", "dk-dialog--" + size, props.className),
+      "data-component": "dialog",
+      "data-size": size,
+      onCancel,
+      onClose,
+      onPointerDown,
+      onClick
+    },
+    /* @__PURE__ */ React.createElement("div", { className: "dk-dialog__panel" }, has(props.title) || has(props.description) || showClose ? /* @__PURE__ */ React.createElement("div", { className: "dk-dialog__header" }, /* @__PURE__ */ React.createElement("div", { className: "dk-dialog__heading" }, has(props.title) ? /* @__PURE__ */ React.createElement("h2", { className: "dk-dialog__title", id: base + "-title" }, props.title) : null, has(props.description) ? /* @__PURE__ */ React.createElement("p", { className: "dk-dialog__description", id: base + "-desc" }, props.description) : null), showClose ? /* @__PURE__ */ React.createElement(IconButton, { className: "dk-dialog__close", icon: icons.Close, label: props.closeLabel || sds.labels.close, size: "sm", noTitle: true, onClick: close }) : null) : null, has(props.children) ? /* @__PURE__ */ React.createElement("div", { className: "dk-dialog__body" }, props.children) : null, has(props.footer) ? /* @__PURE__ */ React.createElement("div", { className: "dk-dialog__footer" }, props.footer) : null)
+  );
+});
+export {
+  Dialog
+};
+//# sourceMappingURL=Dialog.js.map
