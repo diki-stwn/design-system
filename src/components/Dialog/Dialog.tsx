@@ -67,7 +67,8 @@ export const Dialog = /* @__PURE__ */ component<HTMLDialogElement, DialogProps>(
     }
   }, [props.open]);
   // Closed while unmounting: give focus back too.
-  React.useEffect(() => { const d = el.current; return () => { if (d) modalClosed(d); const b = back.current; if (b && b.isConnected) b.focus(); }; }, []);
+  // StrictMode unmounts and mounts again with the <dialog> still open: put it back on the modal stack then.
+  React.useEffect(() => { const d = el.current; if (d && d.open) modalOpened(d); return () => { if (d) modalClosed(d); const b = back.current; if (b && b.isConnected) b.focus(); }; }, []);
 
   // Escape fires "cancel": ask instead of closing, so open stays the truth.
   // React passes a nested dialog's cancel and close up to this one, though the browser doesn't bubble them: only

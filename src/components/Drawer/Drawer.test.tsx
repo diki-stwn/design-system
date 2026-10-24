@@ -7,6 +7,7 @@ import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { Dialog } from '../Dialog/Dialog';
 import { Drawer, type DrawerProps } from './Drawer';
+import { topModal } from '../../internal/layers';
 
 const el = (id: string) => document.getElementById(id) as HTMLElement;
 const drw = () => el('drw') as HTMLDialogElement;
@@ -42,6 +43,15 @@ const reopen = async (ctl: Partial<Ctl>, fn: () => void) => {
 describe('Drawer', () => {
   beforeEach(async () => { await page.viewport(1000, 700); });
   afterAll(async () => { await page.viewport(900, 700); });
+
+  test('open on mount in StrictMode (mounted, unmounted and mounted again): still the innermost modal, so the live regions move into it; closing takes it off', async () => {
+    const app = (open: boolean) => <React.StrictMode><Drawer id="strict" open={open} title="Strict" onOpenChange={() => {}}>Body</Drawer></React.StrictMode>;
+    const r = await render(app(true));
+    const d = document.getElementById('strict')!.closest('dialog')!;
+    expect([d.open, topModal() === d]).toEqual([true, true]);
+    await r.rerender(app(false));
+    await expect.poll(() => topModal()).toBe(null);
+  });
 
   test('closed at first: not shown', async () => {
     await render(<App asks={[]} ctl={{}} />);

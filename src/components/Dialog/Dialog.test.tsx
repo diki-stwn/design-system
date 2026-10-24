@@ -6,6 +6,7 @@ import { THEMES, contrast } from '../../../tools/test/vitest/helpers';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { Dialog } from './Dialog';
+import { topModal } from '../../internal/layers';
 
 const el = (id: string) => document.getElementById(id) as HTMLElement;
 const dlg = (id: string) => el(id) as HTMLDialogElement;
@@ -36,6 +37,15 @@ const openDlg = async () => { await userEvent.click(el('opener')); await expect.
 describe('Dialog', () => {
   beforeEach(async () => { await page.viewport(1000, 700); });
   afterAll(async () => { await page.viewport(900, 700); });
+
+  test('open on mount in StrictMode (mounted, unmounted and mounted again): still the innermost modal, so the live regions move into it; closing takes it off', async () => {
+    const app = (open: boolean) => <React.StrictMode><Dialog id="strict" open={open} title="Strict" onOpenChange={() => {}}>Body</Dialog></React.StrictMode>;
+    const r = await render(app(true));
+    const d = document.getElementById('strict')!.closest('dialog')!;
+    expect([d.open, topModal() === d]).toEqual([true, true]);
+    await r.rerender(app(false));
+    await expect.poll(() => topModal()).toBe(null);
+  });
 
   test('closed at first: not shown', async () => {
     await render(<App asks={[]} ctl={{}} />);

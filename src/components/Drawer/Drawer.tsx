@@ -66,7 +66,8 @@ export const Drawer = /* @__PURE__ */ component<HTMLDialogElement, DrawerProps>(
       if (b && b.isConnected && typeof b.focus === "function") b.focus();
     }
   }, [props.open]);
-  React.useEffect(() => { const d = el.current; return () => { if (d) modalClosed(d); const b = back.current; if (b && b.isConnected) b.focus(); }; }, []);
+  // StrictMode unmounts and mounts again with the <dialog> still open: put it back on the modal stack then.
+  React.useEffect(() => { const d = el.current; if (d && d.open) modalOpened(d); return () => { if (d) modalClosed(d); const b = back.current; if (b && b.isConnected) b.focus(); }; }, []);
 
   // React passes a nested dialog's cancel and close up to this one, though the browser doesn't bubble them: only
   // this dialog's own count, or Escape in a Dialog or Drawer opened from inside it would close this one too.

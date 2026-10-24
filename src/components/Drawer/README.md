@@ -42,6 +42,7 @@ const [open, setOpen] = React.useState(false);
 ## Accessibility
 
 - `aria-modal`, named by the title (`aria-labelledby`) and described by the description.
+- While it's open, the page's screen reader announcements and toasts move inside it, since the page behind is inert. That holds in development under React StrictMode too, also for a Drawer that is open when it first mounts.
 - The title, description and body text keep 4.5:1 on the panel in all six themes (`Drawer.test.tsx`). In forced-colors mode the panel gets a border.
 - A Dialog opened from inside it closes on its own: Escape closes the Dialog first, and the next Escape the Drawer.
 
